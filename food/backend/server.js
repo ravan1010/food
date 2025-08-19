@@ -37,7 +37,8 @@ app.get("/:slug", (req, res) => {
 }); 
 
 dbconnection().then(() => {
-    app.listen(port, () => {
+   
+}) 
+ app.listen(port, () => {
         console.log(`server run at ${port} `)
     })
-})
