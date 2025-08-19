@@ -24,7 +24,7 @@ const Ownerlog = () => {
     e.preventDefault();
 
     try {
-        await axios.post("http://localhost:5001/api/owner/log",{ 
+        await axios.post("/api/owner/log",{ 
           number : adminsignup, 
         },
          { withCredentials: true })

@@ -29,7 +29,7 @@ const ToAddress = () => {
 
     try {
 
-        await axios.post("http://localhost:5001/api/to/address",{ 
+        await axios.post("/api/to/address",{ 
             Fullname : Fullname,
             FHBCA: FHBCA,
             ASSV: ASSV,

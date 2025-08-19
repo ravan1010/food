@@ -10,7 +10,7 @@ export const Postaddandremove = () => {
 
     const postfetch = async() => {
         try {
-            await axios.get(`http://localhost:5001/api/owner/getpostdata`,
+            await axios.get(`/api/owner/getpostdata`,
                  {withCredentials: true})
                  .then((res) => setpost(res.data))
                  .catch((err) => console.log(err))
@@ -25,7 +25,7 @@ export const Postaddandremove = () => {
 
     const AddTohome = async(id) => {
         try {
-            await axios.post(`http://localhost:5001/api/owner/postTohomepage`,{id},
+            await axios.post(`/api/owner/postTohomepage`,{id},
                  {withCredentials: true})
                  .then((res) => alert(res.data.message))
                  .catch((err) => console.log(err))
@@ -36,7 +36,7 @@ export const Postaddandremove = () => {
 
      const rmoveinhome = async(id) => {
         try {
-            await axios.post(`http://localhost:5001/api/owner/removepostinhomepage`,{id},
+            await axios.post(`/api/owner/removepostinhomepage`,{id},
                  {withCredentials: true})
                  .then((res) => alert(res.data.message))
                  .catch((err) => console.log(err))

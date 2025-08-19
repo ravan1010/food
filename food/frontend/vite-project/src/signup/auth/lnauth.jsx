@@ -7,7 +7,7 @@ const Authlocation = () => {
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:5001/api/authlocation', { withCredentials: true })
+    axios.get('/api/authlocation', { withCredentials: true })
       .then((res) => setUser(res.data.user))
       .catch(() => setUser(null))
       .finally(() => setChecking(false));

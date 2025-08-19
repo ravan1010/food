@@ -14,7 +14,7 @@ const Adminlandmarkdashboard = () => {
 
 
     const fetchImages = async () => {
-    const res = await axios.get(`http://localhost:5001/api/admin/dashboard`, {withCredentials: true} );
+    const res = await axios.get(`/api/admin/dashboard`, {withCredentials: true} );
     setpost(res.data.post);
     setproductlist(res.data.productlist)
     // setauthorid(res.data.author)
@@ -27,7 +27,7 @@ const Adminlandmarkdashboard = () => {
 
   const deleteProduct = async (id) => {
     try {
-      await axios.delete(`http://localhost:5001/api/admin/${id}`, {withCredentials: true})
+      await axios.delete(`/api/admin/${id}`, {withCredentials: true})
       .then((res) => {
         alert(res.data.message)
          window.location.reload();

@@ -67,7 +67,7 @@ const Adminlandmark = () => {
 
     try {
 
-        await axios.post("http://localhost:5001/api/admin/post",{
+        await axios.post("/api/admin/post",{
           name: name,
           description: description,
           price: price,

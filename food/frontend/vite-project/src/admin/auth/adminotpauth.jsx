@@ -7,7 +7,7 @@ const ADMINOTPAuth = () => {
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:5001/api/adminotp', { withCredentials: true })
+    axios.get('/api/adminotp', { withCredentials: true })
       .then((res) => setUser(res.data.user))
       .catch(() => setUser(null))
       .finally(() => setChecking(false));

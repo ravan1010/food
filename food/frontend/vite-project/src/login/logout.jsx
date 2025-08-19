@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.get("http://localhost:5001/api/logout" ,{ withCredentials: true })
+      await axios.get("/api/logout" ,{ withCredentials: true })
       .then(() => {
         setUser(null); // Clear local auth state
         navigate('/signup')

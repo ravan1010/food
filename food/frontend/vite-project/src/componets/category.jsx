@@ -20,7 +20,7 @@ function CategoryPage() {
   
     const fetchImages = async () => {
     setLoading(true)
-    const res = await axios.get(`http://localhost:5001/api/getpost-by-category?category=${category}`, {withCredentials: true} );
+    const res = await axios.get(`/api/getpost-by-category?category=${category}`, {withCredentials: true} );
     setpost(res.data.post);
     setLoading(false)
 

@@ -8,7 +8,7 @@ const OwnerAuth = () => {
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:5001/api/owner/token', { withCredentials: true })
+    axios.get('/api/owner/token', { withCredentials: true })
       .then((res) => setowner(res.data.owner))
       .catch(() => setowner(null))
       .finally(() => setChecking(false));

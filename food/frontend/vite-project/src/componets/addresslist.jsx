@@ -10,7 +10,7 @@ const Addresslist = () => {
       const fetchAddress = async () => {
 
       try {
-        const res = await axios.get(`http://localhost:5001/api/address-list`,
+        const res = await axios.get(`/api/address-list`,
             {withCredentials: true}
         );
           setaddress(res.data.address)

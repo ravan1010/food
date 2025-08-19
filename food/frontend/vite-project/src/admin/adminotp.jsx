@@ -18,7 +18,7 @@ const AdminOTPverify = () => {
 
     try {
 
-        await axios.post("http://localhost:5001/api/admin/otp",{ otp : otp },
+        await axios.post("/api/admin/otp",{ otp : otp },
          { withCredentials: true })
          .then((res) => {
           setSuccess(res.data.message)

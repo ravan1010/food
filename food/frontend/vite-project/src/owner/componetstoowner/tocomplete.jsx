@@ -10,7 +10,7 @@ export const Tocomplete = () => {
       const orderSchema = async () => {
   try {
     setLoading(true);
-    const res = await axios.get("http://localhost:5001/api/owner/afterorderprocess", { withCredentials: true });
+    const res = await axios.get("/api/owner/afterorderprocess", { withCredentials: true });
     
     // console.log("API response:", res.data);
 
@@ -36,7 +36,7 @@ export const Tocomplete = () => {
 
       const Tocomplete = async(id) => {
         try {
-            await axios.post(`http://localhost:5001/api/owner/Tocomplete`,{id},
+            await axios.post(`/api/owner/Tocomplete`,{id},
                  {withCredentials: true})
                  .then((res) => {
                   alert(res.data.message)

@@ -20,7 +20,7 @@ const Profile = () => {
 
     
      const fetchtoadmin = async () => {
-      const res = await axios.get(`http://localhost:5001/api/toadmin`, {withCredentials: true} );
+      const res = await axios.get(`/api/toadmin`, {withCredentials: true} );
       settoadmin(res.data)
     };
   
@@ -30,7 +30,7 @@ const Profile = () => {
 
 
      const fetchnumber = async () => {
-        const res = await axios.get(`http://localhost:5001/api/setting`, {withCredentials: true} );
+        const res = await axios.get(`/api/setting`, {withCredentials: true} );
         setnumber(res.data.number);      
       };
     

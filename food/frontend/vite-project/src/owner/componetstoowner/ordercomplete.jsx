@@ -10,7 +10,7 @@ export const OrderComplete = () => {
       const orderSchema = async () => {
   try {
     setLoading(true);
-    const res = await axios.get("http://localhost:5001/api/owner/ordercomplete", { withCredentials: true });
+    const res = await axios.get("/api/owner/ordercomplete", { withCredentials: true });
     
     // console.log("API response:", res.data);
 

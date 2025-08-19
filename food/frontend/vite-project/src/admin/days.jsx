@@ -13,7 +13,7 @@ const OpenDayCalendar = () => {
   useEffect(() => {
     const loadOpenDays = async () => {
       try {
-        const res = await axios.get(`http://localhost:5001/api/openday`,
+        const res = await axios.get(`/api/openday`,
             {withCredentials: true}
         );
         const openDates = res.data.map(dateStr => new Date(dateStr));
@@ -40,7 +40,7 @@ const OpenDayCalendar = () => {
       e.preventDefault(); // Prevent form refresh
 
     try {
-      await axios.post(`http://localhost:5001/api/opendayupdate`,
+      await axios.post(`/api/opendayupdate`,
          {date: selectedDays.map(d => d.toLocaleDateString('en-CA')),
           
           },

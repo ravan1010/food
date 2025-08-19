@@ -7,7 +7,7 @@ const useAuthCheck = () => {
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:5001/api/token', { withCredentials: true })
+    axios.get('/api/token', { withCredentials: true })
       .then((res) => setUser(res.data.user))
       .catch(() => setUser(null))
       .finally(() => setChecking(false));

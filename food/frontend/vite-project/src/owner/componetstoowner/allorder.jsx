@@ -10,7 +10,7 @@ export const Allorder = () => {
       const orderSchema = async () => {
   try {
     setLoading(true);
-    const res = await axios.get("http://localhost:5001/api/owner/getorderdata", { withCredentials: true });
+    const res = await axios.get("/api/owner/getorderdata", { withCredentials: true });
     
     // console.log("API response:", res.data);
 

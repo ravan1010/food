@@ -24,7 +24,7 @@ const ADMINsignup = () => {
     e.preventDefault();
 
     try {
-        await axios.post("http://localhost:5001/api/admin",{ 
+        await axios.post("/api/admin",{ 
           number : adminsignup, 
         },
          { withCredentials: true })

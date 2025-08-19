@@ -24,7 +24,7 @@ const Signup = () => {
 
     try {
 
-        await axios.post("http://localhost:5001/api/signup",{ number : signup },
+        await axios.post("/api/signup",{ number : signup },
          { withCredentials: true })
          .then((res) => {
             setsuccess(res.data.message)

@@ -20,7 +20,7 @@ const Explore = () => {
 
   const fetchEventData = async() => {
   try {
-    const res = await axios.get('http://localhost:5001/api/explore', { withCredentials: true });
+    const res = await axios.get('/api/explore', { withCredentials: true });
     setorganizersData(res.data);
   } catch (error) {
     console.error("Error fetching event data:", error);

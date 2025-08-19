@@ -7,7 +7,7 @@ const Admincategoryadminlandmarkauth = () => {
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:5001/api/admincategory', { withCredentials: true })
+    axios.get('/api/admincategory', { withCredentials: true })
       .then((res) => setUser(res.data.categoryadminlandmark))
       .catch(() => setUser(null))
       .finally(() => setChecking(false));

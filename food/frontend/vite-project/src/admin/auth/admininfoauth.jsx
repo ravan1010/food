@@ -7,7 +7,7 @@ const ADMININFOAuth = () => {
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:5001/api/admininfo', { withCredentials: true })
+    axios.get('/api/admininfo', { withCredentials: true })
       .then((res) => setUser(res.data.user))
       .catch(() => setUser(null))
       .finally(() => setChecking(false));

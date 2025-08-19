@@ -58,7 +58,7 @@ const AdminAddress = () => {
       
         console.log(category)
     try {
-        await axios.post("http://localhost:5001/api/admin/info",{ 
+        await axios.post("/api/admin/info",{ 
             companyName : companyName,
             category : category,
             image: image,
