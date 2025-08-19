@@ -2,7 +2,7 @@ import  { useState } from 'react';
 import {  Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect } from 'react';
-import Navbar from './Navbar';
+import Navbar from './navbar';
 import Footer from './Footer';
 import OrganizerCard from './OrganizerCard';
 
