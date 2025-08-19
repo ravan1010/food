@@ -13,6 +13,6 @@ const dbconnection = async () => {
         console.error("database not connect");
         process.exit(0)
     }
-}
+}              
 
 module.exports = dbconnection;
