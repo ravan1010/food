@@ -7,7 +7,6 @@ const OG_router = require('./router/OG_router.js')
 const getpost = require('./router/Ul.router.js')
 const owner = require('./router/owner_router.js')
 const path = require('path');
-const { fileURLToPath } = require("url");
 
 
 
@@ -33,12 +32,9 @@ app.use('/api', OG_router)
 app.use('/api', getpost)
 app.use('/api', owner)
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 
 app.use(express.static(path.join(__dirname, "../frontend/vite-project/dist")));
-app.get("/", (req, res) => {
+app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/vite-project/dist/index.html"));
 }); 
 
