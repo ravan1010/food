@@ -31,10 +31,12 @@ app.use('/api', OG_router)
 app.use('/api', getpost)
 app.use('/api', owner)
 
-// app.use(express.static(path.join(__dirname, "../frontend/vite-project/dist")));
-// app.get("/:slug", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../frontend/vite-project/dist/index.html"));
-// }); 
+app.use(express.static(path.join(__dirname, "../frontend/vite-project/dist")));
+app.get("/:slug", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/vite-project/dist/index.html"));
+}); 
+
+
 
 dbconnection().then(() => {
    

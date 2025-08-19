@@ -19,7 +19,7 @@ const Home = () => {
       const productSchema = async () => {
         try {
           setLoading(true);
-          const res = await axios.get("api/home", { withCredentials: true });
+          const res = await axios.get("/api/home", { withCredentials: true });
           
           // console.log("API response:", res.data);
 
