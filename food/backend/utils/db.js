@@ -6,10 +6,7 @@ const URL = 'mongodb+srv://ravanravana177:r1a09u4hx4u9sT4T@cluster0.5m8gkwy.mong
 
 const dbconnection = async () => {
 
-mongoose.connect(URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(URL)
 .then(() => console.log("✅ MongoDB connected"))
 .catch((err) => console.error("❌ MongoDB error:", err));
 
