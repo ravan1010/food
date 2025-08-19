@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import OrganizerCard from './OrganizerCard';
-import Navbar from './Navbar';
+import Navbar from './navbar';
 import Footer from './Footer';
 
 function useQuery() {
