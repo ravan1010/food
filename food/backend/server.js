@@ -7,7 +7,7 @@ const OG_router = require('./router/OG_router.js')
 const getpost = require('./router/Ul.router.js')
 const owner = require('./router/owner_router.js')
 const path = require('path');
-import { fileURLToPath } from "url";
+const fileURLToPath = require("url");
 
 
 
