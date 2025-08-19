@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import OrganizerCard from './OrganizerCard';
 // import { SlidersHorizontal } from 'lucide-react';
 import axios from 'axios';
-import Navbar from './Navbar';
+import Navbar from './navbar';
 import Footer from './Footer';
 
 const Explore = () => {
