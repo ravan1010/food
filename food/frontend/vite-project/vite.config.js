@@ -10,7 +10,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:5001", // your backend
+        target: "https://food-4zgz.onrender.com", // your backend
         changeOrigin: true,
         secure: false,
       },
