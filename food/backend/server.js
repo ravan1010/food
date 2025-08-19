@@ -23,7 +23,7 @@ app.use(cors({
 }));
 
 app.get('/', (req, res) => {
-  res.send('Hostinger connected')
+  res.send('connected')
 })
 
 app.use('/api', admin_router)

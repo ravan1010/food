@@ -49,7 +49,7 @@ const Profile = () => {
     <>
     <Navbar />
     <div className='mt-5 lg:mt-20'>
-      <h1 className='font-bold text-2xl border-b-2 mb-5'>{number}</h1>
+      <h1 className='font-bold text-2xl border-b-2 mb-5'>{number ? number : 'user'}</h1>
       <div className='px-5 flex flex-col mb-50'>
       <Link to={'/address-list'}>Address list</Link>
 
