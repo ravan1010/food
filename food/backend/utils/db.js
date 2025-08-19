@@ -7,7 +7,7 @@ const URL = 'mongodb+srv://ravanravana177:c0RPxHEuxVPyxRgw@cluster0.5m8gkwy.mong
 const dbconnection = async () => {
 
     try {
-    await mongoose.connect(URL);
+    await mongoose.connect('mongodb+srv://ravanravana177:c0RPxHEuxVPyxRgw@cluster0.5m8gkwy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
     console.log("database connected successfully");  
     } catch (error) {
         console.error("database not connect");
