@@ -67,7 +67,7 @@ export const setting = async (req, res, next) => {
     try {
         const name = await usermodel.findOne({ number : number })
         console.log(name.number)
-        res.json({number: name.number})
+        res.json({number: name.number || null})
     } catch (error) {
         res.json(error)
     }

@@ -395,13 +395,8 @@ export const Toadmin = async (req, res, next) => {
   
     const admin = await adminmodel.findOne({number: number})
 
-    if(admin.category === "adminlandmark"){
-      res.json(admin.category)
-    // }else if(admin.category === "clientslandmark"){
-    //   res.json(admin.category)
-    // }else if(admin.category === "bothlandmark" || admin.category === "Bothlandmark"){
-    //   res.json(admin.category)
-    }
+      res.json(admin.category || null)
+    
     
   } catch (error) {
     res.json(error)

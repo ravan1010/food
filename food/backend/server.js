@@ -9,9 +9,6 @@ import owner from './router/owner_router.js';
 import path from 'path';
 
 import { fileURLToPath } from "url";
-import { dirname } from "path";
-
-
 
 const port = 5001;
 const app = express()
@@ -50,14 +47,15 @@ app.use('/api', owner)
 
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = path.dirname(__filename);
 
 
 
-app.use(express.static(path.join(__dirname, "../frontend/vite-project/dist")));
+app.use(express.static(path.join(__dirname, "../frontend/vite-project/dist")))
 app.get("/slug", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/vite-project/dist/index.html"));
-}); 
+})
+
 
 
 
