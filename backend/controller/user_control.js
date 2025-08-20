@@ -146,7 +146,6 @@ export const logout = async (req, res, next) => {
                         httpOnly: true,
                         secure: true, // true in production
                         sameSite: 'Strict',
-                        maxAge: 500 * 24 * 60 * 60 * 1000
       }).status(200).json({message:"logout successfully"})
   } catch (error) {
     res.json(error)

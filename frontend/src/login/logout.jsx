@@ -12,9 +12,10 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       await api.get("/api/logout" ,{ withCredentials: true })
-      .then(() => {
-        setUser(null); // Clear local auth state
-        navigate('/signup')
+      .then((res) => {
+        // setUser(); // Clear local auth state
+        // navigate('/signup')
+        alert(res.data.message)
       })
     } catch (err) {
       console.error('Logout failed', err);
