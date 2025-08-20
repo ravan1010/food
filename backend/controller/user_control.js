@@ -144,7 +144,7 @@ export const logout = async (req, res, next) => {
  try {
     res.clearCookie('at', {
                         httpOnly: true,
-                        secure: true, // true in production
+                        secure: "production", // true in production
                         sameSite: 'Strict',
       })
       res.status(200).json({message:"logout successfully"})
