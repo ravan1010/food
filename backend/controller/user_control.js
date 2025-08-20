@@ -142,10 +142,12 @@ export const login = async (req, res, next) => {
 
 export const logout = async (req, res, next) => {
  try {
-    res.clearCookie('at');
-    res.clearCookie('toa');
-    res.clearCookie('cat')
-    res.status(200).json({message:"logout successfully"})
+    res.cookie('at', token, {
+                        httpOnly: true,
+                        secure: true, // true in production
+                        sameSite: 'Strict',
+                        maxAge: 500 * 24 * 60 * 60 * 1000
+      }).status(200).json({message:"logout successfully"})
   } catch (error) {
     res.json(error)
     console.log(error)

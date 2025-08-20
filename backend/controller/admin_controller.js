@@ -69,9 +69,7 @@ export const adminsignup = async (req, res, next) => {
           secure: true,         // true in production with HTTPS
           sameSite: 'none',
           maxAge: 8 * 60 * 1000
-          })  
-
-          res.status(201).json({message: "otp sent"})
+          }).status(201).json({message: "otp sent"})
         
     } catch(error) {
       res.status(401).json({error:error.message})
@@ -99,6 +97,12 @@ export const adminsignupOTPverify = async (req, res, next) => {
 
           if(findotp){
 
+          res.clearCookie("amogu", token, {
+              httpOnly: true,
+              secure: true,         // true in production with HTTPS
+              sameSite: 'none',
+              })
+
           const adminNumber = number
           const token = jwt.sign({ adminNumber , iat: Math.floor(Date.now() / 1000) - 30 }
                  ,process.env.ADMINJWTOTPKEY , { expiresIn: '40d' });
@@ -110,20 +114,9 @@ export const adminsignupOTPverify = async (req, res, next) => {
               maxAge:  60 * 60 * 1000 * 1000
             });
 
-            const categoryid = numExistinAdmin.category
-            const categorytoken = jwt.sign({ categoryid , iat: Math.floor(Date.now() / 1000) - 30 }
-                 ,process.env.ADMINJWTOTPKEY , { expiresIn: '40d' });
-
-            res.cookie('cat', categorytoken, {
-              httpOnly: true,
-              secure: true, // true in production
-              sameSite: 'Strict',
-              maxAge: 60 * 60 * 1000 * 1000
-            });
               await findotp.deleteOne({otp})
-              res.clearCookie('amogu');
 
-              res.status(201).json({message: "main", category: categoryid})
+              res.status(201).json({message: "main"})
 
           }else{
             res.status(401).json({message: "invalid otp" })
@@ -138,6 +131,12 @@ export const adminsignupOTPverify = async (req, res, next) => {
           console.log(findotp)
 
           if(findotp){
+
+            res.clearCookie("amogu", token, {
+              httpOnly: true,
+              secure: true,         // true in production with HTTPS
+              sameSite: 'none',
+              })
             
           const adminNumber = number
           const token = jwt.sign({ adminNumber , iat: Math.floor(Date.now() / 1000) - 30 }
@@ -150,7 +149,6 @@ export const adminsignupOTPverify = async (req, res, next) => {
               maxAge: 5 * 60 * 1000
             });
               await findotp.deleteOne({otp})
-              res.clearCookie('amogu');
 
               res.status(201).json({message: "otp verified"})
 
