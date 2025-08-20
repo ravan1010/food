@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await api.get("/api/logout" ,{ withCredentials: true })
+      await api.post("/api/logout" ,{ withCredentials: true })
       .then((res) => {
         // setUser(); // Clear local auth state
         // navigate('/signup')
