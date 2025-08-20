@@ -1,6 +1,6 @@
-const express = require('express')
-const { signup, verify, setpassword, UserInfo, logout, login, resetpass, resetverify, resetsetpassword, Address, reviewANDrating } = require('../controller/user_control.cjs')
-const { signgu, signpst, signat, resetRg, resetrepst, authLocation,  } = require('../middleware/OGauth.cjs')
+import express from 'express';
+import { Address, login, logout, signup } from '../controller/user_control.js';
+import { authLocation, signat } from '../middleware/OGauth.js';
 const router = express.Router()
 
 router.route('/signup').post(signup)
@@ -24,4 +24,4 @@ router.get('/authlocation', authLocation, async(req, res) => {
 });
 
 
-module.exports = router
+export default router;

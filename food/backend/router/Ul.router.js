@@ -1,10 +1,11 @@
-const express = require('express')
+import express from 'express';
 const router = express.Router()
-const {signat, authLocation} = require('../middleware/OGauth.cjs')
-const { home, setting, address, explore, cartdata, removecart, buy, order, addtocart } = require('../controller/UI.controller.cjs')
+import {signat, authLocation} from '../middleware/OGauth.js';
+import { home, setting, address, explore, cartdata, removecart, buy, order, addtocart } from '../controller/UI.controller.js';
 // const event_post_model = require('../model/event_post_model.js')
-const user_model = require('../model/user_model.cjs')
-const { sign } = require('crypto')
+import user_model from '../model/user_model.js';
+
+
 
 router.route('/home').get( home )
 
@@ -25,6 +26,6 @@ router.route("/buy").post(signat, buy)
 
 router.route("/order").get(signat, order)
 
-module.exports = router
+export default router;
 
  

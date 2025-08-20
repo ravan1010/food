@@ -1,8 +1,10 @@
-const jwt = require('jsonwebtoken')
-require('dotenv').config()
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config()
 
 
-const signat = async (req, res, next) => {
+export const signat = async (req, res, next) => {
     const token = req.cookies.at
     
     if(!token){
@@ -19,8 +21,7 @@ const signat = async (req, res, next) => {
     }
 }
 
-
-const authLocation = (req, res, next) => {
+export const authLocation = (req, res, next) => {
   const token = req.cookies.ln
 
    if(!token){
@@ -36,15 +37,10 @@ const authLocation = (req, res, next) => {
     }
 };
 
-const adu = async (req, res, next) => {
+export const adu = async (req, res, next) => {
     if(req.user === true && req.user.role === "admin"){
         res.status(201).json({message:"admin"})
         next()
     }
 }
 
-module.exports = {
-                  signat,
-                  adu,
-                  authLocation
-}

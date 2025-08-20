@@ -1,18 +1,17 @@
-const admin_model = require('../model/admin_model.cjs')
-const post_model = require('../model/event_post_model.cjs')
-const usermodel = require('../model/user_model.cjs')
-const book_model = require('../model/cart_model.cjs')
-const address_model = require('../model/address_model.cjs')
-const Cart = require("../model/cart_model.cjs");
-const order_model = require('../model/order_model.cjs')
+import admin_model from '../model/admin_model.js';
+import post_model from '../model/event_post_model.js';
+import usermodel from '../model/user_model.js';
+import book_model from '../model/cart_model.js';
+import address_model from '../model/address_model.js';
+import Cart from "../model/cart_model.js";
+import order_model from '../model/order_model.js';
+import nodemailer from "nodemailer";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 
-const nodemailer = require("nodemailer");
-
-require('dotenv').config()
-
-
-const home = async(req, res, next) => {
+export const home = async(req, res, next) => {
     
     try {
 
@@ -26,13 +25,13 @@ const home = async(req, res, next) => {
     }
 }
 
-const explore = async(req, res) => {
+export const explore = async(req, res) => {
     console.log('explore')
     const exploreData = await post_model.find() 
     res.json(exploreData)
 }
 
-const address = async (req, res, next) => {
+export const address = async (req, res, next) => {
 
     const number = req.Atoken.number 
     try {
@@ -60,7 +59,7 @@ const transporter = nodemailer.createTransport({
     }
   });
 
-const setting = async (req, res, next) => {
+export const setting = async (req, res, next) => {
     
     const number = req.Atoken.number
     // const number = req.admintoa.adminNumber
@@ -74,7 +73,7 @@ const setting = async (req, res, next) => {
     }
 }
 
-const addtocart = async(req, res) => {
+export const addtocart = async(req, res) => {
 
   try {
     const { productId, quantity, price} = req.body;
@@ -114,7 +113,7 @@ const addtocart = async(req, res) => {
   }
 }
 
-const cartdata = async(req, res) => {
+export const cartdata = async(req, res) => {
 
     try {
 
@@ -142,7 +141,7 @@ const cartdata = async(req, res) => {
  
 }
 
-const removecart = async(req, res) => {
+export const removecart = async(req, res) => {
 
     try {        
            const number = req.Atoken.number;
@@ -164,7 +163,7 @@ const removecart = async(req, res) => {
     }
 }
 
-const buy = async(req, res) => {
+export const buy = async(req, res) => {
 
   try {
     const { Mobnumber, address } = req.body;
@@ -226,7 +225,7 @@ const buy = async(req, res) => {
 
 }
 
-const order = async(req, res) => {
+export const order = async(req, res) => {
 
     const number = req.Atoken.number;
     const user = await usermodel.findOne({ number });
@@ -245,18 +244,6 @@ const order = async(req, res) => {
     
     res.json(order)
 }
-
-module.exports = { 
-                  home, 
-                  setting,
-                  address,
-                  explore,
-                  addtocart,
-                  cartdata,
-                  buy,
-                  removecart,
-                  order
-                }
 
 
 

@@ -1,14 +1,14 @@
-const usermodel = require('../model/user_model.cjs')
-const otpmodel = require('../model/otp_model.cjs')
-const jwt = require('jsonwebtoken')
-require('dotenv').config()
-const bcrypt = require("bcrypt");
-const express = require('express')
-const addressmodel = require('../model/address_model.cjs')
-const nodemailer = require("nodemailer");
+import usermodel from '../model/user_model.js';
+import otpmodel from '../model/otp_model.js';
+import jwt from 'jsonwebtoken';
+import bcrypt from "bcrypt";
+import express from 'express';
+import addressmodel from '../model/address_model.js';
+import nodemailer from "nodemailer";
+import dotenv from 'dotenv';
 
+dotenv.config();
 
-require('dotenv').config()
  
 
 const transporter = nodemailer.createTransport({
@@ -24,7 +24,7 @@ const transporter = nodemailer.createTransport({
     }
   });
 
-const signup = async (req, res, next) => {
+export const signup = async (req, res, next) => {
 
 try{ 
 
@@ -83,7 +83,7 @@ try{
 
 }
 
-const Address = async (req, res, next) => {
+export const Address = async (req, res, next) => {
         
     const number = req.Atoken.number
     const { Fullname, mobileNo, FHBCA, ASSV, Landmark, pincode, cityTown, state} = req.body
@@ -112,7 +112,7 @@ const Address = async (req, res, next) => {
 
 // const deleteaddress = async()
 
-const login = async (req, res, next) => {
+export const login = async (req, res, next) => {
     try {
         if(req.body.number ){
             const number = req.body.number;
@@ -153,7 +153,7 @@ const login = async (req, res, next) => {
     }
 }
 
-const logout = async (req, res, next) => {
+export const logout = async (req, res, next) => {
  try {
     res.clearCookie('at');
     res.clearCookie('toa');
@@ -165,13 +165,6 @@ const logout = async (req, res, next) => {
   }
 }
 
-
-
-module.exports = {signup, 
-                  logout, 
-                  login,
-                  Address,
-                }
 
 
                 

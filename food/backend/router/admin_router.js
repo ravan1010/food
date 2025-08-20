@@ -1,30 +1,11 @@
 
-const express = require('express')
+import express from 'express';
 
 
-const { signat, authLocation } = require('../middleware/OGauth.cjs')
-const router = express.Router()
-const { admingu, 
-        adminif, 
-        admintoa, 
-        admincat,
-        admindt,
-                } = require('../middleware/admin_auth.cjs');
-const { adminsignup, 
-        adminsignupOTPverify, 
-        admininfo, 
-        ProductDelete,
-        getallAdminpost,
-        dateupdate,
-        getdates,
-        EVENTCreate,
-        dashboard,
-        EVENTDelete,
-        Toadmin,
-        bookedlisttoadmin,
-        ownerlogin,
-        } = require('../controller/admin_controller.cjs');
-const admin_model = require('../model/admin_model.cjs');
+import { signat } from '../middleware/OGauth.js';
+const router = express.Router();
+import { admincat, admingu, adminif, admintoa } from '../middleware/admin_auth.js';
+import { admininfo, adminsignup, adminsignupOTPverify, bookedlisttoadmin, dashboard, dateupdate, EVENTCreate, EVENTDelete, getdates, Toadmin } from '../controller/admin_controller.js';
 
 ///admin
 
@@ -83,4 +64,4 @@ router.get('/admincategory', admincat, (req, res) => {
 })
 
 
-module.exports = router;
+export default router;

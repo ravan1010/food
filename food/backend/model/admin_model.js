@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const bcrypt = require("bcrypt");
+import mongoose from 'mongoose';
+import bcrypt from "bcrypt";
 
 const adminSchema =  mongoose.Schema({
     number:{
@@ -93,5 +93,5 @@ adminSchema.methods.comparePassword = async function (candidatePassword) {
 
 //
 
-module.exports = new mongoose.model("admin", adminSchema);
+export default new mongoose.model("admin", adminSchema);
 

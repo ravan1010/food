@@ -1,14 +1,15 @@
-const adminmodel = require('../model/admin_model.cjs')
-const adminotpmodel = require('../model/admin_otp.cjs')
-const otpGenerate = require('otp-generator')
-const jwt = require('jsonwebtoken')
-const nodemailer = require("nodemailer");
-const post = require('../model/event_post_model.cjs')
-const user = require('../model/user_model.cjs')
-const order = require('../model/order_model.cjs');
-const { setDefaultResultOrder } = require('dns');
+import adminmodel from '../model/admin_model.js';
+import adminotpmodel from '../model/admin_otp.js';
+import otpGenerate from "otp-generator";
+import jwt from 'jsonwebtoken'
+import nodemailer from "nodemailer";
+import post from '../model/event_post_model.js';
+import user from '../model/user_model.js';
+import order from '../model/order_model.js'
+import dotenv from 'dotenv'
 
-require('dotenv').config()
+dotenv.config()
+
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -23,7 +24,7 @@ const transporter = nodemailer.createTransport({
     }
   });
 
-const ownersignup = async (req, res, next) => {
+export const ownersignup = async (req, res, next) => {
 
     const {number} = req.body;
     try { 
@@ -61,7 +62,7 @@ const ownersignup = async (req, res, next) => {
 
 }
 
-const ownersignupOTPverify = async (req, res, next) => { 
+export const ownersignupOTPverify = async (req, res, next) => { 
 
           
           const {otp} = req.body
@@ -86,18 +87,16 @@ const ownersignupOTPverify = async (req, res, next) => {
 
 }  
 
-
 //post get, add, remove, home
 
-const getpostdata = async (req, res, next) => {
+export const getpostdata = async (req, res, next) => {
   
   const postdata = await post.find()
   res.json(postdata);
 
 }
 
-
-const postTohomepage = async (req, res) => {
+export const postTohomepage = async (req, res) => {
 
   try {
     const { id } = req.body;
@@ -118,8 +117,7 @@ const postTohomepage = async (req, res) => {
   }
 };
 
-
-const removepostinhomepage = async (req, res) => {
+export const removepostinhomepage = async (req, res) => {
 
   try {
     const { id } = req.body;
@@ -142,7 +140,7 @@ const removepostinhomepage = async (req, res) => {
 
 //home page posts
 
-const gethomepostdata = async (req, res, next) => {
+export const gethomepostdata = async (req, res, next) => {
   
   const homepostdata = await post.find({status: 'home'})
   res.json(homepostdata);
@@ -151,7 +149,7 @@ const gethomepostdata = async (req, res, next) => {
 
 //order status
 
-const getorderdata = async (req, res, next) => {
+export const getorderdata = async (req, res, next) => {
   
 const orderdata = await order.find()
   .sort({ createdAt: -1 }) // newest first
@@ -167,7 +165,7 @@ const orderdata = await order.find()
 
 }
 
-const orderpending = async(req, res) => {
+export const orderpending = async(req, res) => {
   const orderpend = await order.find({status: 'Pending'})
     .populate([
       {
@@ -180,7 +178,7 @@ const orderpending = async(req, res) => {
   res.json(orderpend)
 }
 
-const orderProcess = async(req, res) => {
+export const orderProcess = async(req, res) => {
    try {
     const { id } = req.body;
     console.log("post", id);
@@ -203,7 +201,7 @@ const orderProcess = async(req, res) => {
   }
 }
 
-const ordercancel = async(req, res) => {
+export const ordercancel = async(req, res) => {
    try {
     const { id } = req.body;
     console.log("post", id);
@@ -223,7 +221,7 @@ const ordercancel = async(req, res) => {
   }
 }
 
-const afterorderprocess = async(req, res) => {
+export const afterorderprocess = async(req, res) => {
   const orderPro = await order.find({status: 'Process'})
     .populate([
       {
@@ -236,7 +234,7 @@ const afterorderprocess = async(req, res) => {
   res.json(orderPro)
 }
 
-const Tocomplete = async(req, res) =>{
+export const Tocomplete = async(req, res) =>{
   try {
     const { id } = req.body;
     console.log("post", id);
@@ -259,7 +257,7 @@ const Tocomplete = async(req, res) =>{
   }
 }
 
-const getordercancel = async(req, res) => {
+export const getordercancel = async(req, res) => {
   const ordercan = await order.find({status: 'cancel'})
     .sort({ createdAt: -1 }) // newest first
     .populate([
@@ -273,7 +271,7 @@ const getordercancel = async(req, res) => {
   res.json(ordercan)
 }
 
-const ordercomplete = async(req, res) => {
+export const ordercomplete = async(req, res) => {
   const ordercom = await order.find({status: 'complete'})
     .sort({ createdAt: -1 }) // newest first
     .populate([
@@ -287,7 +285,7 @@ const ordercomplete = async(req, res) => {
   res.json(ordercom)
 }
 
-const getuserdata = async (req, res, next) => {
+export const getuserdata = async (req, res, next) => {
   
   const userdata = await user.find()
   res.json(userdata);
@@ -295,24 +293,3 @@ const getuserdata = async (req, res, next) => {
 }
 
 
-
-
-
-module.exports = {ownersignup,
-    ownersignupOTPverify,
-    getpostdata,
-    postTohomepage,
-    removepostinhomepage,
-    gethomepostdata,
-    getorderdata,
-    orderpending,
-    orderProcess,
-    ordercancel,
-    afterorderprocess,
-    getordercancel,
-    Tocomplete,
-    ordercomplete,
-    
-    
-
-}

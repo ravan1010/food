@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const adminotpSchema =  mongoose.Schema({
 
@@ -15,4 +15,4 @@ const adminotpSchema =  mongoose.Schema({
 
 })
 
-module.exports = new mongoose.model("adminotp", adminotpSchema)
+export default new mongoose.model("adminotp", adminotpSchema)

@@ -1,14 +1,15 @@
-const adminmodel = require('../model/admin_model.cjs')
-const adminotpmodel = require('../model/admin_otp.cjs')
-const post_model = require('../model/event_post_model.cjs')
-const bookmodel = require('../model/cart_model.cjs')
-const otpGenerate = require('otp-generator')
-const jwt = require('jsonwebtoken')
-const usermodel = require('../model/user_model.cjs')
-const nodemailer = require("nodemailer");
+import adminmodel from '../model/admin_model.js';
+import adminotpmodel from '../model/admin_otp.js';
+import post_model from '../model/event_post_model.js';
+import bookmodel from '../model/cart_model.js';
+import otpGenerate from 'otp-generator';
+import jwt from 'jsonwebtoken';
+import usermodel from '../model/user_model.js';
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv'
 
- 
-require('dotenv').config()
+
+dotenv.config();
 
 
 const transporter = nodemailer.createTransport({
@@ -24,7 +25,7 @@ const transporter = nodemailer.createTransport({
     }
   });
 
-const adminsignup = async (req, res, next) => {
+export const adminsignup = async (req, res, next) => {
 
     const {number} = req.body;
     const num = req.Atoken.number
@@ -78,7 +79,7 @@ const adminsignup = async (req, res, next) => {
 
 }
 
-const adminsignupOTPverify = async (req, res, next) => { 
+export const adminsignupOTPverify = async (req, res, next) => { 
 
       const number = req.admingu.adminNumber
       console.log(number)
@@ -164,7 +165,7 @@ const adminsignupOTPverify = async (req, res, next) => {
       }
 }  
 
-const admininfo = async (req, res, next) => {
+export const admininfo = async (req, res, next) => {
 
         const number = req.adminif.adminNumber
         const { companyName, 
@@ -235,7 +236,7 @@ console.log("suhas")
 
 }
 
-const dateupdate = async (req, res, next) => {
+export const dateupdate = async (req, res, next) => {
 
   const number = req.admintoa.adminNumber
   const adminuser = await adminmodel.findOne({number})
@@ -249,14 +250,14 @@ const dateupdate = async (req, res, next) => {
 
 }
 
-const getdates = async (req, res, next) => {
+export const getdates = async (req, res, next) => {
   const number = req.admintoa.adminNumber
   const adminuser = await adminmodel.findOne({number})
   res.status(200).json(adminuser.opendates)
 }
 
 //posts
-const EVENTCreate = async (req, res, next) => {
+export const EVENTCreate = async (req, res, next) => {
 
 try {
 
@@ -327,7 +328,7 @@ try {
   
 }
 
-const dashboard = async (req, res, next) => {
+export const dashboard = async (req, res, next) => {
   try {
     const id = req.admintoa.adminNumber
     const author = await adminmodel.findOne({number:id})
@@ -341,7 +342,7 @@ const dashboard = async (req, res, next) => {
   }
 }
 
-const EVENTDelete = async (req, res, next) => {
+export const EVENTDelete = async (req, res, next) => {
 
   const number = req.admintoa.adminNumber
   const adminuser = await adminmodel.findOne({number})
@@ -370,7 +371,7 @@ const EVENTDelete = async (req, res, next) => {
 
 ///getallAdminpost for dashboard
 
-const getallAdminpost = async (req, res, next) => {
+export const getallAdminpost = async (req, res, next) => {
        console.log("suhas")
 
   try {
@@ -386,7 +387,7 @@ const getallAdminpost = async (req, res, next) => {
   }
 }
 
-const Toadmin = async (req, res, next) => {
+export const Toadmin = async (req, res, next) => {
 
   const number = req.admintoa.adminNumber
 
@@ -407,7 +408,7 @@ const Toadmin = async (req, res, next) => {
   }
 }
 
-const bookedlisttoadmin = async(req, res) => {
+export const bookedlisttoadmin = async(req, res) => {
     const number = req.admintoa.adminNumber
 
     try {
@@ -426,16 +427,4 @@ const bookedlisttoadmin = async(req, res) => {
 }
 
     
-module.exports = {adminsignup,
-                  adminsignupOTPverify,
-                  admininfo,
-                  EVENTCreate,
-                  dashboard,
-                  EVENTDelete,
-                  getallAdminpost,
-                  dateupdate,
-                  getdates,
-                  Toadmin,
-                  bookedlisttoadmin,
 
-}

@@ -1,5 +1,5 @@
 // models/Cart.js
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 
 const orderItemSchema = new mongoose.Schema({
@@ -21,4 +21,4 @@ const orderSchema = new mongoose.Schema({
   totalAmount: { type: Number },
 }, { timestamps: true });
 
-module.exports = new mongoose.model("Order", orderSchema);
+export default new mongoose.model("Order", orderSchema);

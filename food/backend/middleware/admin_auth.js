@@ -1,9 +1,10 @@
-const jwt = require('jsonwebtoken')
-require('dotenv').config()
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config()
 
 
-
-const admingu = async (req, res, next) => {
+export const admingu = async (req, res, next) => {
     const token = req.cookies.amogu
     
     if(!token){
@@ -20,7 +21,7 @@ const admingu = async (req, res, next) => {
     }
 }
 
-const adminif = async (req, res, next) => {
+export const adminif = async (req, res, next) => {
     const token = req.cookies.amif
     
     if(!token){
@@ -37,7 +38,7 @@ const adminif = async (req, res, next) => {
     }
 }
 
-const admintoa = async (req, res, next) => {
+export const admintoa = async (req, res, next) => {
     const token = req.cookies.toa
     
     if(!token){
@@ -55,7 +56,7 @@ const admintoa = async (req, res, next) => {
 }
 
 //admin categorys
-const admincat = async (req, res, next) => {
+export const admincat = async (req, res, next) => {
     const token = req.cookies.cat
 
     if(!token){
@@ -77,4 +78,3 @@ const admincat = async (req, res, next) => {
 
 
 
-module.exports = {admingu, adminif, admintoa, admincat}

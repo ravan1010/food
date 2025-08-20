@@ -1,6 +1,6 @@
-const express = require('express')
-const { ownersignup, ownersignupOTPverify, imageCreate, imagedelete, getpostdata, postTohomepage, removepostinhomepage, getorderdata, orderpending, orderProcess, ordercancel, getordercancel, afterorderprocess, Tocomplete, ordercomplete } = require('../controller/owner_controller.cjs')
-const { ownertoken } = require('../middleware/owner.cjs')
+import express from 'express';
+import { ownersignup, ownersignupOTPverify, getpostdata, postTohomepage, removepostinhomepage, getorderdata, orderpending, orderProcess, ordercancel, getordercancel, afterorderprocess, Tocomplete, ordercomplete } from '../controller/owner_controller.js';
+import { ownertoken } from '../middleware/owner.js';
 const router = express.Router()
 
 router.route('/owner/log').post(ownersignup)
@@ -37,4 +37,4 @@ router.get('/owner/token', ownertoken, (req, res) => {
     res.json({owner: req.owner})
 });
 
-module.exports = router
+export default router;

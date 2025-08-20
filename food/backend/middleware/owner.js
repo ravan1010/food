@@ -1,8 +1,9 @@
-const jwt = require('jsonwebtoken')
-require('dotenv').config()
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
+dotenv.config()
 
-const ownertoken = async (req, res, next) => {
+export const ownertoken = async (req, res, next) => {
     const token = req.cookies.owner
     
     if(!token){
@@ -21,6 +22,3 @@ const ownertoken = async (req, res, next) => {
     }
 }
 
-module.exports = {
-                ownertoken
-}
