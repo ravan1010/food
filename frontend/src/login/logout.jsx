@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await api.post("/api/logout" ,{ withCredentials: true })
       .then((res) => {
-        // setUser(); // Clear local auth state
+        setUser(null); // Clear local auth state
         // navigate('/signup')
         console.log(res.data.message)
       })
