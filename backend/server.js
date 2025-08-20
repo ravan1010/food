@@ -51,9 +51,9 @@ const __dirname = path.dirname(__filename);
 
 
 
-app.use(express.static(path.join(__dirname, "../frontend/vite-project/dist")))
+app.use(express.static(path.join(__dirname, "../frontend/dist")))
 app.get("/slug", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/vite-project/dist/index.html"));
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 })
 
 
