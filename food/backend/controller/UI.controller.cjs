@@ -1,10 +1,10 @@
-const admin_model = require('../model/admin_model.js')
-const post_model = require('../model/event_post_model.js')
-const usermodel = require('../model/user_model.js')
-const book_model = require('../model/cart_model.js')
-const address_model = require('../model/address_model.js')
-const Cart = require("../model/cart_model.js");
-const order_model = require('../model/order_model.js')
+const admin_model = require('../model/admin_model.cjs')
+const post_model = require('../model/event_post_model.cjs')
+const usermodel = require('../model/user_model.cjs')
+const book_model = require('../model/cart_model.cjs')
+const address_model = require('../model/address_model.cjs')
+const Cart = require("../model/cart_model.cjs");
+const order_model = require('../model/order_model.cjs')
 
 
 const nodemailer = require("nodemailer");

@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const {signat, authLocation} = require('../middleware/OGauth.js')
-const { home, setting, address, explore, cartdata, removecart, buy, order, addtocart } = require('../controller/UI.controller.js')
+const {signat, authLocation} = require('../middleware/OGauth.cjs')
+const { home, setting, address, explore, cartdata, removecart, buy, order, addtocart } = require('../controller/UI.controller.cjs')
 // const event_post_model = require('../model/event_post_model.js')
-const user_model = require('../model/user_model.js')
+const user_model = require('../model/user_model.cjs')
 const { sign } = require('crypto')
 
 router.route('/home').get( home )

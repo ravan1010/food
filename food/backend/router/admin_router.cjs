@@ -2,14 +2,14 @@
 const express = require('express')
 
 
-const { signat, authLocation } = require('../middleware/OGauth.js')
+const { signat, authLocation } = require('../middleware/OGauth.cjs')
 const router = express.Router()
 const { admingu, 
         adminif, 
         admintoa, 
         admincat,
         admindt,
-                } = require('../middleware/admin_auth.js');
+                } = require('../middleware/admin_auth.cjs');
 const { adminsignup, 
         adminsignupOTPverify, 
         admininfo, 
@@ -23,8 +23,8 @@ const { adminsignup,
         Toadmin,
         bookedlisttoadmin,
         ownerlogin,
-        } = require('../controller/admin_controller.js');
-const admin_model = require('../model/admin_model.js');
+        } = require('../controller/admin_controller.cjs');
+const admin_model = require('../model/admin_model.cjs');
 
 ///admin
 

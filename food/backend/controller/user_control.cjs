@@ -1,10 +1,10 @@
-const usermodel = require('../model/user_model.js')
-const otpmodel = require('../model/otp_model.js')
+const usermodel = require('../model/user_model.cjs')
+const otpmodel = require('../model/otp_model.cjs')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 const bcrypt = require("bcrypt");
 const express = require('express')
-const addressmodel = require('../model/address_model.js')
+const addressmodel = require('../model/address_model.cjs')
 const nodemailer = require("nodemailer");
 
 

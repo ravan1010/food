@@ -1,6 +1,6 @@
 const express = require('express')
-const { signup, verify, setpassword, UserInfo, logout, login, resetpass, resetverify, resetsetpassword, Address, reviewANDrating } = require('../controller/user_control.js')
-const { signgu, signpst, signat, resetRg, resetrepst, authLocation,  } = require('../middleware/OGauth.js')
+const { signup, verify, setpassword, UserInfo, logout, login, resetpass, resetverify, resetsetpassword, Address, reviewANDrating } = require('../controller/user_control.cjs')
+const { signgu, signpst, signat, resetRg, resetrepst, authLocation,  } = require('../middleware/OGauth.cjs')
 const router = express.Router()
 
 router.route('/signup').post(signup)

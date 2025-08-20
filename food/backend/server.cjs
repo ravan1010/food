@@ -1,11 +1,13 @@
-const express = require('express')
+// const express = require('express')
+import express from 'express'
 const dbconnection = require('./utils/db.js')
+// import dbconnection from ''
 var cookieParser = require('cookie-parser')
 var cors = require('cors');
-const admin_router = require('./router/admin_router.js')
-const OG_router = require('./router/OG_router.js')
-const getpost = require('./router/Ul.router.js')
-const owner = require('./router/owner_router.js')
+const admin_router = require('./router/admin_router.cjs')
+const OG_router = require('./router/OG_router.cjs')
+const getpost = require('./router/Ul.router.cjs')
+const owner = require('./router/owner_router.cjs')
 // const path = require('path');
 
 import { fileURLToPath } from "url";

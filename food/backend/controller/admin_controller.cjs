@@ -1,10 +1,10 @@
-const adminmodel = require('../model/admin_model.js')
-const adminotpmodel = require('../model/admin_otp.js')
-const post_model = require('../model/event_post_model.js')
-const bookmodel = require('../model/cart_model.js')
+const adminmodel = require('../model/admin_model.cjs')
+const adminotpmodel = require('../model/admin_otp.cjs')
+const post_model = require('../model/event_post_model.cjs')
+const bookmodel = require('../model/cart_model.cjs')
 const otpGenerate = require('otp-generator')
 const jwt = require('jsonwebtoken')
-const usermodel = require('../model/user_model.js')
+const usermodel = require('../model/user_model.cjs')
 const nodemailer = require("nodemailer");
 
  

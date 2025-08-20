@@ -6,7 +6,7 @@
   "type": "module",
 
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.cjs"
   },
   "author": "",
   "license": "ISC",

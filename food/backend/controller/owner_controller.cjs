@@ -1,11 +1,11 @@
-const adminmodel = require('../model/admin_model.js')
-const adminotpmodel = require('../model/admin_otp.js')
+const adminmodel = require('../model/admin_model.cjs')
+const adminotpmodel = require('../model/admin_otp.cjs')
 const otpGenerate = require('otp-generator')
 const jwt = require('jsonwebtoken')
 const nodemailer = require("nodemailer");
-const post = require('../model/event_post_model.js')
-const user = require('../model/user_model.js')
-const order = require('../model/order_model.js');
+const post = require('../model/event_post_model.cjs')
+const user = require('../model/user_model.cjs')
+const order = require('../model/order_model.cjs');
 const { setDefaultResultOrder } = require('dns');
 
 require('dotenv').config()

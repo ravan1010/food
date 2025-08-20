@@ -1,6 +1,6 @@
 const express = require('express')
-const { ownersignup, ownersignupOTPverify, imageCreate, imagedelete, getpostdata, postTohomepage, removepostinhomepage, getorderdata, orderpending, orderProcess, ordercancel, getordercancel, afterorderprocess, Tocomplete, ordercomplete } = require('../controller/owner_controller')
-const { ownertoken } = require('../middleware/owner')
+const { ownersignup, ownersignupOTPverify, imageCreate, imagedelete, getpostdata, postTohomepage, removepostinhomepage, getorderdata, orderpending, orderProcess, ordercancel, getordercancel, afterorderprocess, Tocomplete, ordercomplete } = require('../controller/owner_controller.cjs')
+const { ownertoken } = require('../middleware/owner.cjs')
 const router = express.Router()
 
 router.route('/owner/log').post(ownersignup)
