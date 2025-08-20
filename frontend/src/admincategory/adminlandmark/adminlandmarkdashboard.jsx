@@ -1,10 +1,10 @@
-import axios from 'axios'
 import { useState } from 'react';
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import Footer from '../../componets/Footer';
 
 import { ArrowLeft , Calendar, MessageSquare, User, BadgePlus, StickyNote,} from 'lucide-react';
+import api from '../../api';
 
 const Adminlandmarkdashboard = () => {
 
@@ -14,7 +14,7 @@ const Adminlandmarkdashboard = () => {
 
 
     const fetchImages = async () => {
-    const res = await axios.get(`/api/admin/dashboard`, {withCredentials: true} );
+    const res = await api.get(`/api/admin/dashboard`, {withCredentials: true} );
     setpost(res.data.post);
     setproductlist(res.data.productlist)
     // setauthorid(res.data.author)
@@ -27,7 +27,7 @@ const Adminlandmarkdashboard = () => {
 
   const deleteProduct = async (id) => {
     try {
-      await axios.delete(`/api/admin/${id}`, {withCredentials: true})
+      await api.delete(`/api/admin/${id}`, {withCredentials: true})
       .then((res) => {
         alert(res.data.message)
          window.location.reload();

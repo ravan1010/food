@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import axios from 'axios';
+import api from '../api';;
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 
@@ -29,7 +29,7 @@ const ToAddress = () => {
 
     try {
 
-        await axios.post("/api/to/address",{ 
+        await api.post("/api/to/address",{ 
             Fullname : Fullname,
             FHBCA: FHBCA,
             ASSV: ASSV,

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import axios from 'axios';
+import api from '../api';;
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -24,7 +24,7 @@ const ADMINsignup = () => {
     e.preventDefault();
 
     try {
-        await axios.post("/api/admin",{ 
+        await api.post("/api/admin",{ 
           number : adminsignup, 
         },
          { withCredentials: true })

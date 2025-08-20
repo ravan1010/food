@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import OrganizerCard from './OrganizerCard';
 // import { SlidersHorizontal } from 'lucide-react';
-import axios from 'axios';
+import api from '../api';;
 import Navbar from './navbar';
 import Footer from './Footer';
 
@@ -20,7 +20,7 @@ const Explore = () => {
 
   const fetchEventData = async() => {
   try {
-    const res = await axios.get('/api/explore', { withCredentials: true });
+    const res = await api.get('/api/explore', { withCredentials: true });
     setorganizersData(res.data);
   } catch (error) {
     console.error("Error fetching event data:", error);

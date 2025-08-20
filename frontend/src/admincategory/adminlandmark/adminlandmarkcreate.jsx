@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import axios from 'axios';
 import {  useNavigate } from 'react-router-dom';
+import api from '../../api';
 
 
 
@@ -67,7 +67,7 @@ const Adminlandmark = () => {
 
     try {
 
-        await axios.post("/api/admin/post",{
+        await api.post("/api/admin/post",{
           name: name,
           description: description,
           price: price,

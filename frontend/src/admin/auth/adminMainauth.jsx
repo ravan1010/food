@@ -1,13 +1,13 @@
 // useAuthCheck.js
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../../api';
 
 const ADMINMainauth = () => {
   const [admin, setUser] = useState(null);
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    axios.get('/api/adminmain', { withCredentials: true })
+    api.get('/api/adminmain', { withCredentials: true })
       .then((res) => setUser(res.data.user))
       .catch(() => setUser(null))
       .finally(() => setChecking(false));

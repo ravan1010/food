@@ -7,14 +7,14 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   base: '/',
-  server: {
-    proxy: {
-      "/api": {
-        target: "https://food-4zgz.onrender.com", // your backend
-        // target:'http://localhost:5001',
-        changeOrigin: true,
-        secure: false,
-      },
-    },
-  },
+  // server: {
+  //   proxy: {
+  //     "/api": {
+  //       target: "https://food-4zgz.onrender.com", // your backend
+  //       // target:'http://localhost:5001',
+  //       changeOrigin: true,
+  //       secure: false,
+  //     },
+  //   },
+  // },
 })

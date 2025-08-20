@@ -1,4 +1,4 @@
-import axios from 'axios'
+import api from '../api';
 import React, { useEffect, useState } from 'react'
 import Navbar from './navbar'
 import Footer from './Footer'
@@ -10,7 +10,7 @@ export const Order = () => {
   const orderSchema = async () => {
   try {
     setLoading(true);
-    const res = await axios.get("/api/order", { withCredentials: true });
+    const res = await api.get("/api/order", { withCredentials: true });
     
     // console.log("API response:", res.data);
 

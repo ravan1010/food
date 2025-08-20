@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import axios from 'axios';
+import api from '../api';;
 import { useNavigate } from 'react-router-dom';
 
 
@@ -18,7 +18,7 @@ const AdminOTPverify = () => {
 
     try {
 
-        await axios.post("/api/admin/otp",{ otp : otp },
+        await api.post("/api/admin/otp",{ otp : otp },
          { withCredentials: true })
          .then((res) => {
           setSuccess(res.data.message)

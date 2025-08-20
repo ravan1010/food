@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import axios from 'axios';
+import api from '../api';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -58,7 +58,7 @@ const AdminAddress = () => {
       
         console.log(category)
     try {
-        await axios.post("/api/admin/info",{ 
+        await api.post("/api/admin/info",{ 
             companyName : companyName,
             category : category,
             image: image,

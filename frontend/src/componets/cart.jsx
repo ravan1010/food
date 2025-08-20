@@ -12,7 +12,7 @@ export default function Cart() {
   const getcart = async() => {
     try {
       setLoading(true)
-      await axios.get("/api/cart/get", { withCredentials: true })
+      await api.get("/api/cart/get", { withCredentials: true })
       .then(res => setCart(res.data))
       .catch(err => console.error(err));
       setLoading(false)
@@ -27,7 +27,7 @@ export default function Cart() {
 
    const remove = async (id) => {
     try {
-      const res = await axios.delete(`/api/remove/${id}`, { withCredentials: true });
+      const res = await api.delete(`/api/remove/${id}`, { withCredentials: true });
       alert(res.data.message);
       window.location.reload();
     } catch (error) {

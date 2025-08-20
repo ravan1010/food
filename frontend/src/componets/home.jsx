@@ -1,10 +1,10 @@
 import  { useState } from 'react';
 import {  Link, useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { useEffect } from 'react';
 import Navbar from './navbar';
 import Footer from './Footer';
 import OrganizerCard from './OrganizerCard';
+import api from '../api';
 
 // import ImageSliderforAds from './ads';
 
@@ -19,7 +19,7 @@ const Home = () => {
       const productSchema = async () => {
         try {
           setLoading(true);
-          const res = await axios.get("/api/home", { withCredentials: true });
+          const res = await api.get("/api/home", { withCredentials: true });
           
           // console.log("API response:", res.data);
 

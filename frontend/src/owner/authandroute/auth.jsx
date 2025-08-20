@@ -1,6 +1,6 @@
 // useAuthCheck.js
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../../api';
 
 const OwnerAuth = () => {
   
@@ -8,7 +8,7 @@ const OwnerAuth = () => {
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    axios.get('/api/owner/token', { withCredentials: true })
+    api.get('/api/owner/token', { withCredentials: true })
       .then((res) => setowner(res.data.owner))
       .catch(() => setowner(null))
       .finally(() => setChecking(false));

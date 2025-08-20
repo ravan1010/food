@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import axios from 'axios';
+import api from '../api';;
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -17,7 +17,7 @@ const Login = () => {
 
     try {
 
-        await axios.post("/api/login",{ 
+        await api.post("/api/login",{ 
           number : login, 
          },
          { withCredentials: true })

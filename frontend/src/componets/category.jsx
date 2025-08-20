@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../api';;
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import OrganizerCard from './OrganizerCard';
@@ -20,7 +20,7 @@ function CategoryPage() {
   
     const fetchImages = async () => {
     setLoading(true)
-    const res = await axios.get(`/api/getpost-by-category?category=${category}`, {withCredentials: true} );
+    const res = await api.get(`/api/getpost-by-category?category=${category}`, {withCredentials: true} );
     setpost(res.data.post);
     setLoading(false)
 

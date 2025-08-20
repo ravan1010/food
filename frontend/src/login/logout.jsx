@@ -1,5 +1,5 @@
 // AuthContext.js
-import axios from 'axios';
+import api from '../api';;
 import React, { createContext, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.get("/api/logout" ,{ withCredentials: true })
+      await api.get("/api/logout" ,{ withCredentials: true })
       .then(() => {
         setUser(null); // Clear local auth state
         navigate('/signup')

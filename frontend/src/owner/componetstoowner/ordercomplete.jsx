@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import OrderNavbar from './ordernavber'
-import axios from 'axios';
 import OwnerNavbar from './navbertoowner';
+import api from '../../api';
 
 export const OrderComplete = () => {
     const [order, setorder] = useState([]); // ✅ array not string
@@ -10,7 +10,7 @@ export const OrderComplete = () => {
       const orderSchema = async () => {
   try {
     setLoading(true);
-    const res = await axios.get("/api/owner/ordercomplete", { withCredentials: true });
+    const res = await api.get("/api/owner/ordercomplete", { withCredentials: true });
     
     // console.log("API response:", res.data);
 

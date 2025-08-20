@@ -13,7 +13,7 @@ const OrganizerCard = ({ organizer }) => {
     
     const addToCart = async (productId, price, quantity = 1) => {
     try {
-      const res = await axios.post("/api/cart/add", { productId, quantity, price }, { withCredentials: true });
+      const res = await api.post("/api/cart/add", { productId, quantity, price }, { withCredentials: true });
       console.log(res.data.message);
       if(res.data.message){
         setnoti('Added to cart')

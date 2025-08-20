@@ -48,7 +48,7 @@ export default function Checkout() {
     }
 
   useEffect(() => {
-    axios.get("/api/cart/get", { withCredentials: true })
+    api.get("/api/cart/get", { withCredentials: true })
       .then(res => {
         setCartItems(res.data.items);
         const totalPrice = res.data.items.reduce(
@@ -68,7 +68,7 @@ export default function Checkout() {
 
    const loadOpenDays = async () => {
         try {
-          const res = await axios.get(`/api/address-list`,
+          const res = await api.get(`/api/address-list`,
               {withCredentials: true}
           );
             setSelectaddress(res.data.address)
@@ -106,7 +106,7 @@ const buyNow = async (e) => {
   e.preventDefault();
 
     try {
-      await axios.post("/api/buy", {
+      await api.post("/api/buy", {
         Mobnumber: mobileNo,
         address: saveAddress,
       }, { withCredentials: true })

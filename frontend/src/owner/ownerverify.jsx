@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import api from '../api';
 
 
 
@@ -18,7 +18,7 @@ const Ownerverify = () => {
 
     try {
 
-        await axios.post("/api/owner/verify",{ otp : otp },
+        await api.post("/api/owner/verify",{ otp : otp },
          { withCredentials: true })
          .then((res) => {
           setSuccess(res.data.message)

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import OrderNavbar from './ordernavber'
-import axios from 'axios';
 import OwnerNavbar from './navbertoowner';
+import api from '../../api';
 
 export const Pendingorder = () => {
     const [order, setorder] = useState([]); // ✅ array not string
@@ -10,7 +10,7 @@ export const Pendingorder = () => {
       const orderSchema = async () => {
   try {
     setLoading(true);
-    const res = await axios.get("/api/owner/orderpending", { withCredentials: true });
+    const res = await api.get("/api/owner/orderpending", { withCredentials: true });
     
     // console.log("API response:", res.data);
 
@@ -36,7 +36,7 @@ export const Pendingorder = () => {
 
       const process = async(id) => {
         try {
-            await axios.post(`/api/owner/orderProcess`,{id},
+            await api.post(`/api/owner/orderProcess`,{id},
                  {withCredentials: true})
                  .then((res) => {
                   alert(res.data.message)
@@ -50,7 +50,7 @@ export const Pendingorder = () => {
 
      const cancel = async(id) => {
         try {
-            await axios.post(`/api/owner/ordercancel`,{id},
+            await api.post(`/api/owner/ordercancel`,{id},
                  {withCredentials: true})
                  .then((res) => {
                   alert(res.data.message)

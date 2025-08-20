@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
-import axios from 'axios';
+import api from '../api';;
 import { Link, useNavigate } from 'react-router-dom';
 
 const OpenDayCalendar = () => {
@@ -13,7 +13,7 @@ const OpenDayCalendar = () => {
   useEffect(() => {
     const loadOpenDays = async () => {
       try {
-        const res = await axios.get(`/api/openday`,
+        const res = await api.get(`/api/openday`,
             {withCredentials: true}
         );
         const openDates = res.data.map(dateStr => new Date(dateStr));
@@ -40,7 +40,7 @@ const OpenDayCalendar = () => {
       e.preventDefault(); // Prevent form refresh
 
     try {
-      await axios.post(`/api/opendayupdate`,
+      await api.post(`/api/opendayupdate`,
          {date: selectedDays.map(d => d.toLocaleDateString('en-CA')),
           
           },

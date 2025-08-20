@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../api';;
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -20,7 +20,7 @@ const Profile = () => {
 
     
      const fetchtoadmin = async () => {
-      const res = await axios.get(`/api/toadmin`, {withCredentials: true} );
+      const res = await api.get(`/api/toadmin`, {withCredentials: true} );
       settoadmin(res.data)
     };
   
@@ -30,7 +30,7 @@ const Profile = () => {
 
 
      const fetchnumber = async () => {
-        const res = await axios.get(`/api/setting`, {withCredentials: true} );
+        const res = await api.get(`/api/setting`, {withCredentials: true} );
         setnumber(res.data.number);      
       };
     

@@ -1,13 +1,13 @@
 // useAuthCheck.js
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../../api';
 
 const Authlocation = () => {
   const [user, setUser] = useState(null);
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    axios.get('/api/authlocation', { withCredentials: true })
+    api.get('/api/authlocation', { withCredentials: true })
       .then((res) => setUser(res.data.user))
       .catch(() => setUser(null))
       .finally(() => setChecking(false));

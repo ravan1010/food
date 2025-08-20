@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './navbertoowner' 
 import OwnerAuth from '../authandroute/auth'
-import axios from 'axios'
+import api from '../../api'
+
 
 export const Postaddandremove = () => {
     const {owner} = OwnerAuth()
@@ -10,7 +11,7 @@ export const Postaddandremove = () => {
 
     const postfetch = async() => {
         try {
-            await axios.get(`/api/owner/getpostdata`,
+            await api.get(`/api/owner/getpostdata`,
                  {withCredentials: true})
                  .then((res) => setpost(res.data))
                  .catch((err) => console.log(err))
@@ -25,7 +26,7 @@ export const Postaddandremove = () => {
 
     const AddTohome = async(id) => {
         try {
-            await axios.post(`/api/owner/postTohomepage`,{id},
+            await api.post(`/api/owner/postTohomepage`,{id},
                  {withCredentials: true})
                  .then((res) => alert(res.data.message))
                  .catch((err) => console.log(err))
@@ -36,7 +37,7 @@ export const Postaddandremove = () => {
 
      const rmoveinhome = async(id) => {
         try {
-            await axios.post(`/api/owner/removepostinhomepage`,{id},
+            await api.post(`/api/owner/removepostinhomepage`,{id},
                  {withCredentials: true})
                  .then((res) => alert(res.data.message))
                  .catch((err) => console.log(err))

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../api';;
 import { ArrowLeft } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
@@ -10,7 +10,7 @@ const Addresslist = () => {
       const fetchAddress = async () => {
 
       try {
-        const res = await axios.get(`/api/address-list`,
+        const res = await api.get(`/api/address-list`,
             {withCredentials: true}
         );
           setaddress(res.data.address)

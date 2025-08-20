@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-
+import api from '../api';
 
 
 const Signup = () => {
@@ -24,7 +23,7 @@ const Signup = () => {
 
     try {
 
-        await axios.post("/api/signup",{ number : signup },
+        await api.post("/api/signup",{ number : signup },
          { withCredentials: true })
          .then((res) => {
             setsuccess(res.data.message)
