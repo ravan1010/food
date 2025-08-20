@@ -130,20 +130,7 @@ export const login = async (req, res, next) => {
                         secure: true, // true in production
                         sameSite: 'Strict',
                         maxAge: 500 * 24 * 60 * 60 * 1000
-                    });
-                     const authlocation = user.CorT
-                     const ltoken = jwt.sign({ authlocation , iat: Math.floor(Date.now() / 1000) - 30 }
-                      ,process.env.JWTOTPKEY , { expiresIn: '500d' });
-                    
-                    res.cookie('ln',ltoken , {
-                      httpOnly: true,
-                      secure: true,         // true in production with HTTPS
-                      sameSite: 'Strict',
-                      maxAge: 500 * 24 * 60 * 60 * 1000
-                    }) 
-                
-                    res.status(201).json({ message: 'Logged in successfully'});
-                    console.log(user)
+                    }).status(201).json({ message: 'Logged in successfully'});
     
         }else{
             res.status(401).json({message:"fill all"})
