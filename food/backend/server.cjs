@@ -1,6 +1,6 @@
 // const express = require('express')
 import express from 'express'
-const dbconnection = require('./utils/db.js')
+const dbconnection = require('./utils/db.cjs')
 // import dbconnection from ''
 var cookieParser = require('cookie-parser')
 var cors = require('cors');
