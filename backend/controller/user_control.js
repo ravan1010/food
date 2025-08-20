@@ -142,7 +142,7 @@ export const login = async (req, res, next) => {
 
 export const logout = async (req, res, next) => {
  try {
-    res.cookie('at', token, {
+    res.clearCookie('at', {
                         httpOnly: true,
                         secure: true, // true in production
                         sameSite: 'Strict',

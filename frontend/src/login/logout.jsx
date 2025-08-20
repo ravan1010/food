@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
       .then((res) => {
         // setUser(); // Clear local auth state
         // navigate('/signup')
-        alert(res.data.message)
+        console.log(res.data.message)
       })
     } catch (err) {
       console.error('Logout failed', err);
