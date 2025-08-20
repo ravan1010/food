@@ -30,8 +30,10 @@ const Profile = () => {
 
 
      const fetchnumber = async () => {
-        const res = await api.get(`/api/setting`, {withCredentials: true} );
-        setnumber(res.data.number);      
+        const res = await api.get(`/api/setting`, {withCredentials: true} )
+        .then((res) => setnumber(res.data.number))
+        .catch((err) => console.log(err));
+        // setnumber(res.data.number);      
       };
     
       useEffect(() => {

@@ -113,7 +113,6 @@ export const Address = async (req, res, next) => {
 // const deleteaddress = async()
 
 export const login = async (req, res, next) => {
-  console.log('login')
     try {
         if(req.body.number ){
             const number = req.body.number;
