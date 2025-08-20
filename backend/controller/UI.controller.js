@@ -14,12 +14,10 @@ dotenv.config();
 export const home = async(req, res, next) => {
     
     try {
-
+      console.log('home')
         const post = await post_model.find({status: 'home'})
-            console.log(post)
-        res.json(post)
+        res.json(post || null)
        
-
     } catch (error) {
         res.json(error)
     }
@@ -28,7 +26,7 @@ export const home = async(req, res, next) => {
 export const explore = async(req, res) => {
     console.log('explore')
     const exploreData = await post_model.find() 
-    res.json(exploreData)
+    res.json(exploreData || null)
 }
 
 export const address = async (req, res, next) => {

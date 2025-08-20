@@ -19,7 +19,7 @@ app.use(cookieParser())
 
 const allowedOrigins = [
   "http://localhost:5173",   // React dev
-  "https://food-frontend-uxf6.onrender.com"         // another origin
+  "https://food-del-sandy.vercel.app"         // another origin
 ];
  
 app.use(cors({
