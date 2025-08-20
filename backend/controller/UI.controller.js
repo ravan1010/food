@@ -60,14 +60,17 @@ const transporter = nodemailer.createTransport({
 export const setting = async (req, res, next) => {
     
     const number = req.Atoken.number
-    // const number = req.admintoa.adminNumber
 
     try {
+
         const name = await usermodel.findOne({ number : number })
-        console.log(name.number)
-        res.json({number: name.number || null})
+        if(!name){
+          return res.status(400).json('user not found')
+        }
+
+        res.json({number: name.number} || null)
     } catch (error) {
-        res.json(error)
+        res.status(400).json(error)
     }
 }
 

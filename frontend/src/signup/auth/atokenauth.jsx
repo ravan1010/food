@@ -7,7 +7,7 @@ const useAuthCheck = () => {
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    api.get('/api/token', { withCredentials: true })
+    api.get('/api/token', { withCredentials: true , headers: { "Content-Type": "application/json" }})
       .then((res) => setUser(res.data.user))
       .catch(() => setUser(null))
       .finally(() => setChecking(false));

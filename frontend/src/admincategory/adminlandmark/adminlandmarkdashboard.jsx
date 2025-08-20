@@ -41,8 +41,8 @@ const Adminlandmarkdashboard = () => {
 
   return (
     <>
+    <Link to="/" className='h-10 w-[20%] grid mx-auto underline '>Home</Link>
     <div className="bg-gray-100 min-h-screen">
-    <Link to="/" ><ArrowLeft size={30} /></Link>
         <div className="container mx-auto p-4 sm:p-6 lg:p-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-6">Dashboard</h1>
           
