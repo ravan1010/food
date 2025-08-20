@@ -1,4 +1,4 @@
-import api from '../api';;
+import api from '../api';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import OrganizerCard from './OrganizerCard';

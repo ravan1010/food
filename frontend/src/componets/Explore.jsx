@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import OrganizerCard from './OrganizerCard';
 // import { SlidersHorizontal } from 'lucide-react';
-import api from '../api';;
+import api from '../api';
 import Navbar from './navbar';
 import Footer from './Footer';
 

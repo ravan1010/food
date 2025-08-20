@@ -1,4 +1,4 @@
-import api from '../api';;
+import api from '../api';
 import { ArrowLeft } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';

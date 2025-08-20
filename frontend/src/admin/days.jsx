@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
-import api from '../api';;
+import api from '../api';
 import { Link, useNavigate } from 'react-router-dom';
 
 const OpenDayCalendar = () => {

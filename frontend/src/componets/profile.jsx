@@ -1,4 +1,4 @@
-import api from '../api';;
+import api from '../api';
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
