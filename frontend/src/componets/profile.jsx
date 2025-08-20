@@ -80,6 +80,7 @@ const Profile = () => {
               >
                 No
               </button>
+                <button onclick={logout}>logout to</button>
             </div>
           </div>
         </div>
