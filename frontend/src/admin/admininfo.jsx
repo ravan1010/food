@@ -74,7 +74,6 @@ const AdminAddress = () => {
          .then((res) => {
             setsuccess(res.data.message)
               navigate(`/admin/setdate`)
-            
          })
     } catch (err) {
        if (err.response) {

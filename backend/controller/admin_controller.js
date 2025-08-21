@@ -30,10 +30,6 @@ export const adminsignup = async (req, res, next) => {
     const {number} = req.body;
 
     try { 
-
-      // if(){
-      //   return res.status(404).json('invalid name')
-      // }
       
     const otp = otpGenerate.generate(6, { upperCaseAlphabets: false, lowerCaseAlphabets: false, specialChars: false })
 
@@ -97,13 +93,12 @@ export const adminsignupOTPverify = async (req, res, next) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      path: "/",
     });
 
     if (numExistinAdmin) {
       // admin already exists
       const token = jwt.sign(
-        { adminNumber: number, iat: Math.floor(Date.now() / 1000) - 30 },
+        { adminNumber: number.adminNumber, iat: Math.floor(Date.now() / 1000) - 30 },
         process.env.ADMINJWTOTPKEY,
         { expiresIn: "40d" }
       );
@@ -111,17 +106,16 @@ export const adminsignupOTPverify = async (req, res, next) => {
       res.cookie("toa", token, {
         httpOnly: true,
         secure: true,
-        sameSite: "Strict",
+        sameSite: "none",
         maxAge: 60 * 60 * 1000 * 1000,
-        path: "/",
       });
 
       await findotp.deleteOne({ otp });
-      return res.status(201).json({ message: "main" });
+      return res.status(201).json({ message: "main", category: numExistinAdmin.category});
     } else {
       // new admin
       const token = jwt.sign(
-        { adminNumber: number, iat: Math.floor(Date.now() / 1000) - 30 },
+        { adminNumber: number.adminNumber, iat: Math.floor(Date.now() / 1000) - 30 },
         process.env.ADMINJWTOTPKEY,
         { expiresIn: "5m" }
       );
@@ -131,7 +125,6 @@ export const adminsignupOTPverify = async (req, res, next) => {
         secure: true,
         sameSite: "none",
         maxAge: 5 * 60 * 1000,
-        path: "/",
       });
 
       await findotp.deleteOne({ otp });
@@ -156,7 +149,7 @@ export const admininfo = async (req, res, next) => {
                 cityTown, 
                 state, 
               } = req.body;
-console.log("suhas")
+console.log("partner info")
       
   try{
       const admininfo = await adminmodel.create({
@@ -175,6 +168,12 @@ console.log("suhas")
 
       await admininfo.save()
 
+        res.clearCookie("amif", {
+                httpOnly: true,
+                secure: true,
+                sameSite: "none",
+              });
+
         const user = await usermodel.findOne({number})
         console.log(user)
 
@@ -185,18 +184,7 @@ console.log("suhas")
           res.cookie('toa', token, {
               httpOnly: true,
               secure: true, // true in production
-              sameSite: 'Strict',
-              maxAge: 60 * 60 * 1000 * 1000
-            });
-
-            const categoryid = category
-            const categorytoken = jwt.sign({ categoryid , iat: Math.floor(Date.now() / 1000) - 30 }
-                 ,process.env.ADMINJWTOTPKEY , { expiresIn: '40d' });
-
-            res.cookie('cat', categorytoken, {
-              httpOnly: true,
-              secure: true, // true in production
-              sameSite: 'Strict',
+              sameSite: 'none',
               maxAge: 60 * 60 * 1000 * 1000
             });
 
@@ -204,9 +192,8 @@ console.log("suhas")
             user.role = "admin";
             user.adminID = admininfo._id;
             await user.save()
-
-            res.clearCookie('amif');
-            res.status(201).json({message:"ok",category: category})
+            
+            return res.status(201).json({message:"ok"})
 
         } catch (error) {
           res.json(error)

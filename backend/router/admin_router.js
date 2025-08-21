@@ -13,13 +13,13 @@ router.route('/admin').post(signat, adminsignup)
 router.route('/admin/otp').post(signat, admingu, adminsignupOTPverify)
 router.route('/admin/info').post(signat, adminif, admininfo)
 
-router.route('/opendayupdate').post(signat, admintoa, admincat, dateupdate);
-router.route('/openday').get(signat, admintoa, admincat, getdates)
+router.route('/opendayupdate').post(admintoa, dateupdate);
+router.route('/openday').get(admintoa, getdates)
 
 //product 
-router.route('/admin/post').post(signat, admintoa, admincat, EVENTCreate  )
-router.route('/admin/dashboard').get(signat, admintoa, admincat, dashboard )
-router.route('/admin/:id').delete(signat, admintoa, admincat, EVENTDelete)
+router.route('/admin/post').post(admintoa, EVENTCreate  )
+router.route('/admin/dashboard').get(admintoa, dashboard )
+router.route('/admin/:id').delete(admintoa, EVENTDelete)
 
 
 router.route('/toadmin').get(admintoa, Toadmin)
@@ -38,30 +38,6 @@ router.get('/adminmain', admintoa, (req, res) => {
     res.json({user: req.admintoa})
 
 });
-
-//admin category route
-router.get('/admincategory', admincat, (req, res) => {
-    try {      
-    //food
-    if(req.cat.categoryid === "adminlandmark"){
-        res.json({categoryadminlandmark: req.cat})
-    }
-    //fashion
-    else if(req.cat.categoryid === "clientslandmark"){
-        res.json({categoryclientslandmark: req.cat})
-    }
-    //
-    else if(req.cat.categoryid === "Bothlandmark" || req.cat.categoryid === "bothlandmark"){
-        res.json({categoryBothlandmark: req.cat})
-    }
-    else{
-        res.json({})
-    }
-
-     } catch (error) {
-        
-    }
-})
 
 
 export default router;

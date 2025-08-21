@@ -26,7 +26,6 @@ import OpenDayCalendar from './admin/days';
 
 import ProtectedRouteAuthlocation from './signup/auth/authroute/lnauthroute';
 //adminlandmark dashboard and product create route
-import ProtectedRouteadminlandmark from './admincategory/adminlandmark/adminlandmarkauth/adminlandmarkauthroute/adminlandmarkcreateroute';
 import Adminlandmark from './admincategory/adminlandmark/adminlandmarkcreate';
 import Adminlandmarkdashboard from './admincategory/adminlandmark/adminlandmarkdashboard';
 
@@ -110,9 +109,7 @@ function App() {
           <Route path='/adminlandmark/productcreate' element={
           <ProtectedRoute>
               <ProtectedRouteADMINMain>
-                <ProtectedRouteadminlandmark>
                   <Adminlandmark />
-                </ProtectedRouteadminlandmark>
               </ProtectedRouteADMINMain>
           </ProtectedRoute>
          } />
@@ -121,9 +118,7 @@ function App() {
           <Route path='/adminlandmark/dashboard' element={
           <ProtectedRoute>
               <ProtectedRouteADMINMain>
-                <ProtectedRouteadminlandmark>
                   <Adminlandmarkdashboard />
-                </ProtectedRouteadminlandmark>
               </ProtectedRouteADMINMain>
           </ProtectedRoute>
          } />
@@ -171,10 +166,14 @@ function App() {
             <Ownerverify />
           } />
           <Route path='/owner' element={
-            <Ownerdashboard />
+            <OwnerRoute>
+              <Ownerdashboard />
+            </OwnerRoute>
           } />
           <Route path='/postaddandremove' element={
-            <Postaddandremove />
+            <OwnerRoute>
+              <Postaddandremove />
+            </OwnerRoute>
           } />
           <Route path='/allorder' element={
               <OwnerRoute>

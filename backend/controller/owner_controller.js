@@ -63,13 +63,12 @@ export const ownersignup = async (req, res, next) => {
 }
 
 export const ownersignupOTPverify = async (req, res, next) => { 
-
-          
           const {otp} = req.body
 
           const findotp = await adminotpmodel.findOne({ otp })
 
-          if(findotp){
+          try {
+          if(!findotp){return res.json({message:'no'})}
 
           const adminNumber = 'foundersuhascofoundersuhas'
           const token = jwt.sign({ adminNumber , iat: Math.floor(Date.now() / 1000) - 30 }
@@ -78,12 +77,16 @@ export const ownersignupOTPverify = async (req, res, next) => {
           res.cookie('owner', token, {
               httpOnly: true,
               secure: true, // true in production
-              sameSite: 'Strict',
+              sameSite: 'none',
               maxAge: 400 * 24 * 60 * 60 * 1000
-            });
-        }
+            })
+            return res.json({message: 'verified'})
+          } catch (error) {
+            console.log(error)
+            res.status(400).json(error)
+          }
 
-        res.json({message: "verified"})
+       
 
 }  
 
