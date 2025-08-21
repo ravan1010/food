@@ -126,13 +126,12 @@ export const login = async (req, res, next) => {
                 const token = jwt.sign({ number , iat: Math.floor(Date.now() / 1000) - 30 }
                         ,process.env.JWTOTPKEY , { expiresIn: '500d' });
 
-                 res.cookie('at', token, {
-                    httpOnly: true,
-                    secure: true,
-                    sameSite: 'Strict',
-                    maxAge: 500 * 24 * 60 * 60 * 1000,
-                    path: "/"
-                  }).status(201).json({ message: 'Logged in successfully'});
+                    res.cookie('at', token, {
+                        httpOnly: true,
+                        secure: true, // true in production
+                        sameSite: 'Strict',
+                        maxAge: 500 * 24 * 60 * 60 * 1000
+                    }).status(201).json({ message: 'Logged in successfully'});
     
         }else{
             res.status(401).json({message:"fill all"})
@@ -143,22 +142,18 @@ export const login = async (req, res, next) => {
 }
 
 export const logout = async (req, res, next) => {
-  try {
-    res.clearCookie("at", {
-      httpOnly: true,
-      secure: true,      // must match how cookie was set
-      sameSite: "Strict",// must match
-      path: "/",         // must match
-    });
-
-    res.status(200).json({ message: "logout successfully" });
+ try {
+    res.clearCookie('at', {
+                        httpOnly: true,
+                        secure: true, // true in production
+                        sameSite: 'Strict',
+      })
+      res.status(200).json({message:"logout successfully"})
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Logout failed", error: error.message });
   }
-};
-
-
+}
 
 
                 

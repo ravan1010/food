@@ -83,7 +83,7 @@ const Profile = () => {
           </div>
         </div>
       )}
-      
+      <button onclick={logout}>logout to</button>
         {
         admin ? 
         <>
