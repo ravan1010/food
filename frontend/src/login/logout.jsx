@@ -6,7 +6,7 @@ export const logout = async () => {
     alert(res.data.message);
 
     // clear client state (Redux, Context, localStorage)
-    localStorage.removeItem("user");
+    localStorage.removeItem("at");
     // navigate to login page
     window.location.href = "/";
   } catch (err) {
