@@ -18,12 +18,18 @@ app.use(express.json({ limit: '200mb' }))
 app.use(cookieParser())
 
 
+// app.use(cors({
+//   // origin: "https://food-del-sandy.vercel.app", // or your custom domain
+//   // origin: "http://localhost:5173",
+//   origin: "https://food-frontend-iij1.onrender.com",
+//   credentials: true
+// }));
+
 app.use(cors({
-  // origin: "https://food-del-sandy.vercel.app", // or your custom domain
-  // origin: "http://localhost:5173",
-  origin: "https://food-frontend-iij1.onrender.com",
+  origin: true, // reflects request origin automatically
   credentials: true
 }));
+
 
 // const allowedOrigins = [
 //   "http://localhost:5173",   // React dev
