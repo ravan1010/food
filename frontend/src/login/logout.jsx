@@ -1,32 +1,15 @@
-// AuthContext.js
-import api from '../api';
-import React, { createContext, useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import api from "../api";
 
-const AuthContext = createContext();
+export const logout = async () => {
+  try {
+    const res = await api.post("/api/logout"); // credentials already included
+    alert(res.data.message);
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
-
-  const logout = async () => {
-    try {
-      await api.get("/api/logout" ,{ withCredentials: true })
-      .then((res) => {
-        // setUser(); // Clear local auth state
-        // navigate('/signup')
-        console.log(res.data.message)
-      })
-    } catch (err) {
-      console.error('Logout failed', err);
-    }
-  };
-
-  return (
-    <AuthContext.Provider value={{ user, setUser, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
+    // clear client state (Redux, Context, localStorage)
+    localStorage.removeItem("user");
+    // navigate to login page
+    window.location.href = "/login";
+  } catch (err) {
+    console.error("Logout failed:", err.response?.data || err.message);
+  }
 };
-
-export const useAuth = () => useContext(AuthContext);
