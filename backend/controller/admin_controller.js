@@ -28,7 +28,6 @@ const transporter = nodemailer.createTransport({
 export const adminsignup = async (req, res, next) => {
 
     const {number} = req.body;
-    const num = req.Atoken.number
 
     try { 
 
@@ -78,90 +77,71 @@ export const adminsignup = async (req, res, next) => {
 }
 
 export const adminsignupOTPverify = async (req, res, next) => { 
+  const number = req.admingu;
+  console.log(number);
 
-      const number = req.admingu.adminNumber
-      console.log(number)
+  try {
+    const numExistinAdmin = await adminmodel.findOne({ number: number.adminNumber });
+    console.log(numExistinAdmin);
 
-      try {
+    const { otp } = req.body;
+    const findotp = await adminotpmodel.findOne({ otp });
+    console.log(findotp);
 
-        const numExistinAdmin = await adminmodel.findOne({number})
-        console.log(numExistinAdmin)
+    if (!findotp) {
+      return res.status(401).json({ message: "invalid otp" });
+    }
 
-        if(numExistinAdmin){
-          
-          const {otp} = req.body
-          console.log(otp)
+    // clear old cookie
+    res.clearCookie("amogu", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      path: "/",
+    });
 
-          const findotp = await adminotpmodel.findOne({ otp })
-          console.log(findotp)
+    if (numExistinAdmin) {
+      // admin already exists
+      const token = jwt.sign(
+        { adminNumber: number, iat: Math.floor(Date.now() / 1000) - 30 },
+        process.env.ADMINJWTOTPKEY,
+        { expiresIn: "40d" }
+      );
 
-          if(findotp){
+      res.cookie("toa", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "Strict",
+        maxAge: 60 * 60 * 1000 * 1000,
+        path: "/",
+      });
 
-          res.clearCookie("amogu", token, {
-              httpOnly: true,
-              secure: true,         // true in production with HTTPS
-              sameSite: 'none',
-              })
+      await findotp.deleteOne({ otp });
+      return res.status(201).json({ message: "main" });
+    } else {
+      // new admin
+      const token = jwt.sign(
+        { adminNumber: number, iat: Math.floor(Date.now() / 1000) - 30 },
+        process.env.ADMINJWTOTPKEY,
+        { expiresIn: "5m" }
+      );
 
-          const adminNumber = number
-          const token = jwt.sign({ adminNumber , iat: Math.floor(Date.now() / 1000) - 30 }
-                 ,process.env.ADMINJWTOTPKEY , { expiresIn: '40d' });
+      res.cookie("amif", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        maxAge: 5 * 60 * 1000,
+        path: "/",
+      });
 
-          res.cookie('toa', token, {
-              httpOnly: true,
-              secure: true, // true in production
-              sameSite: 'Strict',
-              maxAge:  60 * 60 * 1000 * 1000
-            });
-
-              await findotp.deleteOne({otp})
-
-              res.status(201).json({message: "main"})
-
-          }else{
-            res.status(401).json({message: "invalid otp" })
-          }
-
-        }else if(!numExistinAdmin){
-
-          const {otp} = req.body
-          console.log(otp)
-
-          const findotp = await adminotpmodel.findOne({ otp })
-          console.log(findotp)
-
-          if(findotp){
-
-            res.clearCookie("amogu", token, {
-              httpOnly: true,
-              secure: true,         // true in production with HTTPS
-              sameSite: 'none',
-              })
-            
-          const adminNumber = number
-          const token = jwt.sign({ adminNumber , iat: Math.floor(Date.now() / 1000) - 30 }
-                 ,process.env.ADMINJWTOTPKEY , { expiresIn: '5m' });
-
-          res.cookie('amif', token, {
-              httpOnly: true,
-              secure: true, // true in production
-              sameSite: 'none',
-              maxAge: 5 * 60 * 1000
-            });
-              await findotp.deleteOne({otp})
-
-              res.status(201).json({message: "otp verified"})
-
-          }else{
-            res.status(401).json({message:"invalid otp"})
-          }
-        }else{
-          res.status(401).json({menubar:"sorry"})
-        }    
-      } catch (error) {
-        res.status(401).json({message: error})
-      }
-}  
+      await findotp.deleteOne({ otp });
+      return res.status(201).json({ message: "otp verified" });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(401).json({ message: error.message || "Server error" });
+  }
+};
 
 export const admininfo = async (req, res, next) => {
 

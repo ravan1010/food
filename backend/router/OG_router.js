@@ -8,7 +8,7 @@ router.route('/to/address').post( signat, Address)
 
 
 router.route('/login').post(login)
-router.route('/logout').get(signat, logout)
+router.route('/logout').post(signat, logout)
  
 
 //auth check for frontend

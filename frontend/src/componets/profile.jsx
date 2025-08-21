@@ -3,16 +3,15 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../login/logout';
 import ADMINMainauth from '../admin/auth/adminMainauth';
 import Navbar from './navbar';
 import useAuthCheck from '../signup/auth/atokenauth';
 import Footer from './Footer'
+import { logout } from '../login/logout';
 
 const Profile = () => {
 
     const [number, setnumber] = useState()
-    const {logout} = useAuth();
     const { admin } = ADMINMainauth();
     const { user } = useAuthCheck()
     const [toadmin, settoadmin] = useState('')

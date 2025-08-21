@@ -19,8 +19,8 @@ app.use(cookieParser())
 
 
 app.use(cors({
-  origin: "https://food-del-sandy.vercel.app", // or your custom domain
-  // origin: "http://localhost:5173",
+  // origin: "https://food-del-sandy.vercel.app", // or your custom domain
+  origin: "http://localhost:5173",
   credentials: true
 }));
 

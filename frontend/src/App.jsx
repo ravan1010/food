@@ -11,7 +11,7 @@ import ProtectedRoute from './signup/auth/authroute/atokenroute';
 
 //login
 import Login from './login/login';
-import { AuthProvider, useAuth } from './login/logout';
+// import { AuthProvider, useAuth } from './login/logout';
 
 //admin
 import ADMINsignup from './admin/adminsignup';
@@ -151,9 +151,7 @@ function App() {
          } />
         
          <Route path='/profile' element={
-              <AuthProvider>
                 <Profile />
-              </AuthProvider>
           } />
 
           <Route path='/address-list' element={
