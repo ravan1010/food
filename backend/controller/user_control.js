@@ -29,21 +29,20 @@ export const signup = async (req, res, next) => {
 
 try{ 
 
-    if(req.body.number){
-        const number  = req.body.number
-        // console.log(req.body.number,"to", number)
+    if(!req.body.number || !req.body.password){
+        return res.status(400).json({message: "fill all form"})
+    }    
+        const number  = req.body.number 
+        const password = req.body.password
+
             const userNUMExisting = await usermodel.findOne({ number })
             if(userNUMExisting){return res.status(400).json({message:"user already have account"})}
                 
-                    // const otp = otpGenerate.generate(6, { upperCaseAlphabets: false, lowerCaseAlphabets: false, specialChars: false })
-
                     const token = jwt.sign({ number , iat: Math.floor(Date.now() / 1000) - 30 }
                       ,process.env.JWTOTPKEY , { expiresIn: '500d' }
                   );
 
-                    // const otpEmail = await otpmodel.create({ otp })
-                    // await otpEmail.save()
-                    const user = await usermodel.create({number})
+                    const user = await usermodel.create({number, password})
                     await user.save()
 
     const mailOptions = {
@@ -72,11 +71,6 @@ try{
                           .status(201)
                           .json({ message: 'otp sent'});                   
                            
-
-    }else{
-        res.status(400).json({message: "fill all form"})
-        console.log('fill')
-    }    
     } catch (error) {
         res.status(400).json({message:error})
         console.log(error)
@@ -115,12 +109,19 @@ export const Address = async (req, res, next) => {
 
 export const login = async (req, res, next) => {
     try {
-        if(req.body.number ){
+      if(!req.body.number || !req.body.password){
+        return res.status(400).json({message: "fill all form"})
+    }    
             const number = req.body.number;
+            const password = req.body.password;
 
                 const user = await usermodel.findOne({ number });
-                if (!user) return res.status(401).json({ message: 'Invalid number or password' });
+                if (!user) return res.status(401).json({ message: 'Invalid ' });
 
+                const isMatch = await user.comparePassword(password);
+                if (!isMatch) {
+                  return res.status(400).json({ message: "Invalid " });
+                }
                 // Compare password
                
                 const token = jwt.sign({ number , iat: Math.floor(Date.now() / 1000) - 30 }
@@ -133,9 +134,6 @@ export const login = async (req, res, next) => {
                             maxAge: 500 * 24 * 60 * 60 * 1000
                           }).status(201).json({ message: 'Logged in successfully'});
     
-        }else{
-            res.status(401).json({message:"fill all"})
-        }
     } catch (error) {
         res.status(401).json({message:error})
     }
@@ -155,6 +153,7 @@ export const logout = async (req, res) => {
     res.status(500).json({ message: "Logout failed", error: error.message });
   }
 };
+
 
 
 

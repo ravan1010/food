@@ -7,6 +7,8 @@ import { Link, useNavigate } from 'react-router-dom';
 const Login = () => {
 
     const [login, setlogin] = useState('');
+    const [password, setpassword] = useState('');
+    const [show, setshow] = useState(false)
     const [error, setError] = useState('');
     const [success, setsuccess] = useState('');
     const navigate = useNavigate();
@@ -15,10 +17,15 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if(password <= 8){
+      return setError('minimun 8 digit require')
+    }
+
     try {
 
         await api.post("/api/login",{ 
           number : login, 
+          password: password
          },
          { withCredentials: true })
          .then((res) => {
@@ -59,6 +66,30 @@ const Login = () => {
                         className="w-full px-3 py-3 border-b-2 outline-none mt-4 h-10"
 
                         />
+
+                          <div className="relative w-full">
+
+                        <input 
+                        type={show ? 'text' : 'password'}
+                        name='password'
+                        placeholder='password'
+                        autoComplete='on'
+                        minLength={8}
+                        maxLength={30}
+                        value={password}
+                        onChange={(e) => setpassword(e.target.value)}  
+                        required 
+                        className="w-full px-3 py-3 border-b-2 outline-none mt-4 h-10"
+
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setshow((prev) => !prev)}
+                          className="absolute inset-y-0 right-2 flex items-center text-gray-500"
+                        >
+                          {show ? "hide" : "show"}
+                        </button>
+                      </div>
 
 
                         { success ? 

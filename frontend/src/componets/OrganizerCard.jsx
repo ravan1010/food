@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Star, MapPin } from 'lucide-react';
 import axios from "axios";
 import { useState } from 'react';
+import api from '../api';
 
 
 const OrganizerCard = ({ organizer }) => {
@@ -21,7 +22,7 @@ const OrganizerCard = ({ organizer }) => {
         setnoti()
       }, 1000);}
     } catch (error) {
-      console.error(error.response.data);
+      console.error(error);
     }
   };
 

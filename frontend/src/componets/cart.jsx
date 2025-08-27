@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Navbar from "./navbar"
 import Footer from "./Footer"
+import api from "../api";
 
 export default function Cart() {
   const [cart, setCart] = useState([]);

@@ -26,10 +26,9 @@ const Addresslist = () => {
     },[])
 
   return (
-    <div className='p-5 h-auto'>
-                      <Link to="/profile" ><ArrowLeft size={30} /></Link>
-      
+    <div className='p-5 h-auto'>      
       <div className='flex w-full mb-2'>
+      <Link to="/profile" ><ArrowLeft size={30} /></Link>
       <h1 className='font-bold text-2xl w-[80%]'>Address List</h1>
       <Link to={'/address'} className='text-2xl border px-8 rounded-3xl bg-blue-400 text-white'>Add</Link>
       </div>

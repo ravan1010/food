@@ -13,10 +13,13 @@ router.route('/logout').post(signat, logout)
 
 //auth check for frontend
 
-router.get('/token', signat, async(req, res) => {
-    res.json({user: req.Atoken})
-    console.log(req.user)
+router.get('/token', signat, async (req, res) => {
+    if (!req.Atoken) {
+        return res.status(401).json({ message: "Unauthorized" });
+    }
+    res.json({ user: req.Atoken });
 });
+
 
 router.get('/authlocation', authLocation, async(req, res) => {
     res.json({user: req.location})

@@ -5,6 +5,8 @@ import api from '../api';
 const Signup = () => {
 
     const [signup, setsignup] = useState('');
+    const [password, setpassword] = useState('');
+    const [show, setshow] = useState(false)
     const [error, setError] = useState('');
     const [success, setsuccess] = useState('');
     const navigate = useNavigate();
@@ -12,7 +14,6 @@ const Signup = () => {
 
    function handleNUMChange(e) {
          const value = e.target.value;
-  // Allow only numbers
             setsignup(value);
         
     }
@@ -20,9 +21,13 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if(password <= 8){
+      return setError('minimun 8 digit require')
+    }
+
     try {
 
-        await api.post("/api/signup",{ number : signup },
+        await api.post("/api/signup",{ number : signup, password : password},
          { withCredentials: true })
          .then((res) => {
             setsuccess(res.data.message)
@@ -60,6 +65,31 @@ const Signup = () => {
                         className="w-full px-3 py-3 border-b-2 outline-none mt-4 h-10"
 
                         />
+
+                      <div className="relative w-full">
+
+                        <input 
+                        type={show ? 'text' : 'password'}
+                        name='password'
+                        placeholder='password'
+                        autoComplete='on'
+                        minLength={8}
+                        maxLength={30}
+                        value={password}
+                        onChange={(e) => setpassword(e.target.value)}  
+                        required 
+                        className="w-full px-3 py-3 border-b-2 outline-none mt-4 h-10"
+
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setshow((prev) => !prev)}
+                          className="absolute inset-y-0 right-2 flex items-center text-gray-500"
+                        >
+                          {show ? "hide" : "show"}
+                        </button>
+                      </div>
+
                         {error && <p style={{ color: 'red' }}>{error}</p>}
                         {success && <p style={{ color: 'greenyellow' }}> {success} </p>}
 

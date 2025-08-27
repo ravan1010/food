@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { ArrowLeft } from "lucide-react";
+import api from "../api";
 
 
 export default function Checkout() {
@@ -127,7 +128,7 @@ const buyNow = async (e) => {
 
   return (
     <div className="checkout">
-      <Link to="/cart" ><ArrowLeft size={30} /></Link>
+
       <h2 className="font-bold text-2xl mb-2">Checkout</h2>
       
       <form action="post" onSubmit={buyNow}>
@@ -195,5 +196,6 @@ const buyNow = async (e) => {
         </div>
       )}
     </div>
+
   );
 }

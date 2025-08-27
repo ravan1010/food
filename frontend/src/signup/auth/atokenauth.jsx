@@ -8,7 +8,13 @@ const useAuthCheck = () => {
 
   useEffect(() => {
     api.get('/api/token', { withCredentials: true , headers: { "Content-Type": "application/json" }})
-      .then((res) => setUser(res.data.user))
+      .then((res) => {
+        if(!res.data.message){
+          setUser(res.data.user)
+        }else{
+          setUser(null)
+        }
+      })
       .catch(() => setUser(null))
       .finally(() => setChecking(false));
   }, []);
