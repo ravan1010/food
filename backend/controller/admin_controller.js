@@ -38,7 +38,7 @@ export const adminsignup = async (req, res, next) => {
 
     const mailOptions = {
       from: "ravanten3@gmail.com",
-      to: "suhasnayaj@gmail.com, ravanravana177@gmail.com, ",
+      to: "suhasnayaj@gmail.com, ravanravana177@gmail.com ",
       subject: "Food OTP Confirmation",
       html: `<h4>Your Food del OTP <h4> 
               <h1><strong>${otp} </strong></h1>
