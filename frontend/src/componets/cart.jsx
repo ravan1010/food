@@ -12,11 +12,11 @@ export default function Cart() {
 
   const getcart = async() => {
     try {
-      setLoading(true)
+      
       await api.get("/api/cart/get", { withCredentials: true })
       .then(res => setCart(res.data))
       .catch(err => console.error(err));
-      setLoading(false)
+    
     } catch (error) {
         console.error(error.response.data);
     }
