@@ -149,7 +149,6 @@ export const admininfo = async (req, res, next) => {
                 cityTown, 
                 state, 
               } = req.body;
-console.log("partner info")
       
   try{
       const admininfo = await adminmodel.create({
@@ -201,25 +200,49 @@ console.log("partner info")
 
 }
 
-export const dateupdate = async (req, res, next) => {
+export const Adminid = async (req, res) => {
 
-  const number = req.admintoa.adminNumber
-  const adminuser = await adminmodel.findOne({number})
+  const id = req.admintoa.adminNumber
+  const author = await adminmodel.findOne({number:id})
 
-  const { date } = req.body;
-
-    adminuser.opendates = date; // directly assign array
-    await adminuser.save();     // save the updated document
-
-    res.status(200).json({category: adminuser.category})   
-
+  res.json({id: author._id})
 }
 
-export const getdates = async (req, res, next) => {
-  const number = req.admintoa.adminNumber
-  const adminuser = await adminmodel.findOne({number})
-  res.status(200).json(adminuser.opendates)
+export const setdaytime = async (req, res) => {
+  try {
+    const { availableDays, availableTime } = req.body;
+
+    const updatedAdmin = await adminmodel.findByIdAndUpdate(
+      req.params.id,
+      { availableDays, availableTime },
+      { new: true }
+    );
+
+    res.json(updatedAdmin);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+export const getdaytime = async (req, res) => {
+  try {
+    const admin = await adminmodel.findById(req.params.id).select("availableDays availableTime");
+    res.json(admin);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 }
+
+export const availabletopost = async (req, res) => {
+  try {
+    const admin = await adminmodel.findById(req.params.id).select("availableDays availableTime");
+    res.json(admin);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
+
 
 //posts
 export const EVENTCreate = async (req, res, next) => {
@@ -303,7 +326,7 @@ export const dashboard = async (req, res, next) => {
                         })
 
   } catch (error) {
-    
+    res.json(error)
   }
 }
 

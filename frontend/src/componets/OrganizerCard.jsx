@@ -1,17 +1,19 @@
 // src/components/OrganizerCard.jsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Star, MapPin } from 'lucide-react';
-import axios from "axios";
+import isCartEnabled from './cartenable'; 
 import { useState } from 'react';
+
 import api from '../api';
 
 
 const OrganizerCard = ({ organizer }) => {
   const [noti, setnoti] = useState(' ')
   const [quantity, setquantity] = useState(1); // ✅ now setquantity is a real function
-    const reversedID = organizer._id.split("").reverse().join(""); // => "tcaer"
-    
+  const reversedID = organizer._id.split("").reverse().join(""); // => "tcaer"
+  const [availability, setAvailability] = useState(null);
+
     const addToCart = async (productId, price, quantity = 1) => {
     try {
       const res = await api.post("/api/cart/add", { productId, quantity, price }, { withCredentials: true });
@@ -26,6 +28,15 @@ const OrganizerCard = ({ organizer }) => {
     }
   };
 
+   useEffect(() => {
+    if(!organizer.author) return;
+
+    api.get(`/api/${organizer.author}/availability`)
+      .then(res => setAvailability(res.data))
+      .catch(err => console.error(err));
+  }, [organizer.author]);
+
+  const enabled = isCartEnabled(availability);
 
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 group">
@@ -68,7 +79,15 @@ const OrganizerCard = ({ organizer }) => {
               </select>
           </div>
 
-          <button onClick={() => addToCart(organizer._id, quantity * organizer.platformFee ,quantity)} className="border-2 w-[50%] mx-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-2xl">Add to Cart</button>
+          <button 
+            onClick={() => addToCart(organizer._id, quantity * organizer.platformFee ,quantity)}
+            disabled={!enabled}
+            className={`px-4 py-2 rounded ${
+              enabled ? "bg-green-600 text-white" : "bg-gray-400 text-white cursor-not-allowed"
+            }`}
+           >
+              {enabled ? "Add to Cart" : "Cart Disabled (Outside Admin Hours)"}
+            </button>
           </div>
         </div>
       {/* </Link> */}

@@ -58,7 +58,15 @@ const adminSchema =  mongoose.Schema({
         //     type: mongoose.Schema.Types.ObjectId,
         //     ref: 'User',
         // },
-    opendates:[String],
+    availableDays: [{ 
+        type: String, 
+        enum: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] 
+    }],
+
+    availableTime: {
+        start: { type: String }, // e.g. "09:00"
+        end: { type: String }    // e.g. "17:00"
+    },
     lastLogin: {
         type: Date,
         default: Date.now

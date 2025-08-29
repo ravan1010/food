@@ -5,7 +5,7 @@ import express from 'express';
 import { signat } from '../middleware/OGauth.js';
 const router = express.Router();
 import { admincat, admingu, adminif, admintoa } from '../middleware/admin_auth.js';
-import { admininfo, adminsignup, adminsignupOTPverify, bookedlisttoadmin, dashboard, dateupdate, EVENTCreate, EVENTDelete, getdates, Toadmin } from '../controller/admin_controller.js';
+import { Adminid, admininfo, adminsignup, adminsignupOTPverify, bookedlisttoadmin, dashboard, EVENTCreate, EVENTDelete, getdaytime, setdaytime, Toadmin } from '../controller/admin_controller.js';
 
 ///admin
 
@@ -13,8 +13,9 @@ router.route('/admin').post(signat, adminsignup)
 router.route('/admin/otp').post(signat, admingu, adminsignupOTPverify)
 router.route('/admin/info').post(signat, adminif, admininfo)
 
-router.route('/opendayupdate').post(admintoa, dateupdate);
-router.route('/openday').get(admintoa, getdates)
+router.route('/adminid').get(admintoa, Adminid);
+router.route('/:id/availability').put(setdaytime);
+router.route('/:id/availability').get(getdaytime);
 
 //product 
 router.route('/admin/post').post(admintoa, EVENTCreate  )

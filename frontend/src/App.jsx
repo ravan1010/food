@@ -50,6 +50,7 @@ import { Pendingorder } from './owner/componetstoowner/orderpending';
 import { Ordercancel } from './owner/componetstoowner/ordercancel';
 import { Tocomplete } from './owner/componetstoowner/tocomplete';
 import { OrderComplete } from './owner/componetstoowner/ordercomplete';
+import AdminAvailabilityForm from './admin/days';
 
 
 function App() {
@@ -62,7 +63,6 @@ function App() {
         <Route path='/signup' element={<SignupOne />} />
         //address
        
-
          <Route path='/address' element={
           <ProtectedRoute >
             <ToAddress />
@@ -98,7 +98,7 @@ function App() {
           <Route path='/admin/setdate' element={
             <ProtectedRoute>
               <ProtectedRouteADMINMain>
-                  <OpenDayCalendar />
+                  <AdminAvailabilityForm />
               </ProtectedRouteADMINMain>
           </ProtectedRoute>
           } />

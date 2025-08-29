@@ -9,7 +9,7 @@ const useAuthCheck = () => {
   useEffect(() => {
     api.get('/api/token', { withCredentials: true , headers: { "Content-Type": "application/json" }})
       .then((res) => {
-        if(!res.data.message){
+        if(!res.data.massage){
           setUser(res.data.user)
         }else{
           setUser(null)

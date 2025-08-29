@@ -74,7 +74,7 @@ const Explore = () => {
           </div>
            {filteredOrganizers.length === 0 && (
             <div className="text-center py-16">
-                <p className="text-gray-600 text-lg">No planners match your criteria. Try adjusting your filters!</p>
+                <p className="text-gray-600 text-lg"></p>
             </div>
            )}
         </div>

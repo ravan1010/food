@@ -1,99 +1,103 @@
-import { useEffect, useState } from 'react';
-import { DayPicker } from 'react-day-picker';
-import 'react-day-picker/dist/style.css';
-import api from '../api';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import api from '../api.js'
 
-const OpenDayCalendar = () => {
+export default function AdminAvailabilityForm() {
+  const [days, setDays] = useState([]);
+  const [time, setTime] = useState({ start: "", end: "" });
+  const [adminId, setadminId] = useState('')
 
-  const [selectedDays, setSelectedDays] = useState([]);
-  const navigate = useNavigate();
+  const handleDayChange = (day) => {
+    setDays((prev) =>
+      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
+    );
+  };
 
 
   useEffect(() => {
-    const loadOpenDays = async () => {
+    const admin = async() => {
       try {
-        const res = await api.get(`/api/openday`,
-            {withCredentials: true}
-        );
-        const openDates = res.data.map(dateStr => new Date(dateStr));
-        setSelectedDays(openDates);
-      } catch (err) {
-        console.error('Error loading open days', err);
+        await api.get('/api/adminid',{withCredentials: true})
+        .then((res) => setadminId(res.data.id))
+        .catch((err) => console.log(err))
+      } catch (error) {
+        console.log(error)
       }
-    };
+    }
+    admin()
+  },[])
 
-    loadOpenDays();
-  },[] );
+   useEffect(() => {
+    if (!adminId) return; // ✅ don't run until we have an ID
 
-  const today = new Date();
+    api.get(`/api/${adminId}/availability`)
+      .then(res => {
+        setDays(res.data.availableDays || [])
+        setTime({
+          start: res.data.availableTime?.start || " ",
+          end: res.data.availableTime?.end || " ",
+        })
+      })
+      .catch(err => console.error(err));
+  }, [adminId]);
 
-  // Disable all dates before today (including yesterday)
-  const disableBefore = new Date(today);
-  disableBefore.setHours(0, 0, 0, 0); // Normalize to midnight
+  // if (!availability) return <p>Loading...</p>;
 
-  // Disable all dates after 5 months from today
-  const disableAfter = new Date(today);
-  disableAfter.setMonth(today.getMonth() + 5);
-
-  const handleDayClick = async (e) => {
-      e.preventDefault(); // Prevent form refresh
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      await api.post(`/api/opendayupdate`,
-         {date: selectedDays.map(d => d.toLocaleDateString('en-CA')),
-          
-          },
-         { withCredentials: true })
-         .then((res) => {
-          navigate(`/${res.data.category}/dashboard`)
-         })
+      await api.put(`/api/${adminId}/availability`, {
+        availableDays: days,
+        availableTime: time,
+      },{withCredentials: true});
+      alert("Availability updated!");
     } catch (err) {
-      console.error('Toggle failed', "heloo");
+      console.error(err);
     }
   };
 
+  const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
   return (
-    <>
-      <div className='md:w-screen md:h-screen'>
-        <div className='flex justify-center h-auto w-full' >
-          <div className='h-auto md:w-100 w-full md:mt-20 border-2 mt-5 pt-1.5 p-5 '>
-            <h1 className='font-bold text-2xl'>mark open days</h1>
-            <p>uncheck your off days</p>
-    <form method='post' onSubmit={handleDayClick}>
-          <div className='h-auto md:w-auto w-auto mt-1.5 pt-1.5 md:p-5 border-t-2 border-b-2'>
-      {selectedDays.length > 0 && (
-       <DayPicker
-        mode="multiple"
-        selected={selectedDays}
-        onSelect={setSelectedDays}
-        disabled={{ before: disableBefore, after: disableAfter }}
-        className='w-full h-auto'
-      />
-        )
-      }
-      {
-        selectedDays.length === 0 && (
-       <DayPicker
-        mode="multiple"
-        selected={selectedDays}
-        onSelect={setSelectedDays}
-        disabled={{ before: disableBefore, after: disableAfter }}
-         className='w-full h-auto'
+    <form onSubmit={handleSubmit} className="p-4 border rounded space-y-4">
+      <h2 className="text-xl font-bold">Set Availability</h2>
 
-      />
-    )
-      }
-   </div>
-    <button type='submit' className="w-full my-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-xl shadow-md transition duration-300">submit</button>
+      <div>
+        <p className="font-semibold">Select Days:</p>
+        {weekdays.map((day) => (
+          <label key={day} className="block">
+            <input
+              type="checkbox"
+              checked={days.includes(day)}
+              onChange={() => handleDayChange(day)}
+            />
+            {day}
+          </label>
+        ))}
+      </div>
+        <hr />
+      <div>
+        <p className="font-semibold">Set Time:</p>
+        <label>
+          Start:{" "}
+          <input
+            type="time"
+            value={time.start}
+            onChange={(e) => setTime({ ...time, start: e.target.value })}
+          />
+        </label>
+        <label className="ml-4">
+          End:{" "}
+          <input
+            type="time"
+            value={time.end}
+            onChange={(e) => setTime({ ...time, end: e.target.value })}
+          />
+        </label>
+      </div>
+
+      <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded">
+        Save
+      </button>
     </form>
-     </div>
-     </div>
-    </div>
-
-   
-</>
   );
-};
-
-export default OpenDayCalendar;
+}

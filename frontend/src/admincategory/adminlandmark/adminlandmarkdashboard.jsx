@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import Footer from '../../componets/Footer';
+import AdminAvailability from "../../componets/getavailabledayandtime.jsx";
 
 import { ArrowLeft , Calendar, MessageSquare, User, BadgePlus, StickyNote,} from 'lucide-react';
 import api from '../../api';
@@ -10,6 +11,8 @@ const Adminlandmarkdashboard = () => {
 
     const [post, setpost] = useState('');
     const [productlist, setproductlist] = useState('');
+    const [adminId, setadminId] = useState('')
+
     // const [authorid, setauthorid] = useState('');
 
 
@@ -37,6 +40,19 @@ const Adminlandmarkdashboard = () => {
       
     }
   }
+
+   useEffect(() => {
+    const admin = async() => {
+      try {
+        await api.get('/api/adminid',{withCredentials: true})
+        .then((res) => setadminId(res.data.id))
+        .catch((err) => console.log(err))
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    admin()
+  },[adminId])
 
 
   return (
@@ -69,7 +85,7 @@ const Adminlandmarkdashboard = () => {
                 </div>
               </div>
             </div>
-            {/* <div className="bg-white p-6 rounded-lg shadow">
+            <div className="bg-white p-6 rounded-lg shadow">
               <div className="flex items-center">
                 <div className="p-3 rounded-full bg-blue-100 text-blue-600">
                   <Calendar size={24} />
@@ -79,7 +95,7 @@ const Adminlandmarkdashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow">
+            {/* <div className="bg-white p-6 rounded-lg shadow">
               <div className="flex items-center">
                 <div className="p-3 rounded-full bg-green-100 text-green-600">
                   <MessageSquare size={24} />
@@ -101,8 +117,9 @@ const Adminlandmarkdashboard = () => {
                 </div>
               </div>
             </div>
+            <AdminAvailability adminId={adminId} />
           </div>
-
+            
           {/*event posts*/}
   
            <div className='w-full mt-10 p-5 flex-col hidden lg:block md:block' >
